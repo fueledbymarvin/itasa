@@ -8,7 +8,8 @@ development:
   adapter: postgresql
   host: localhost
   username: postgres
-  database: rails-base-dev
+  password: hackEsack7
+  database: itasa-dev
 
 # development:
 #   adapter: sqlite3
@@ -29,7 +30,8 @@ test: &test
   adapter: postgresql
   host: localhost
   username: postgres
-  database: rails-base-test
+  password: hackEsack7
+  database: itasa-test
 
 cucumber:
   <<: *test

@@ -1,4 +1,4 @@
-RailsBase::Application.routes.draw do
+Itasa::Application.routes.draw do
   root :to => 'static_pages#home'
 
   match "/admin" => "admin#hub"

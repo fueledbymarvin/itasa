@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-RailsBase::Application.load_tasks
+Itasa::Application.load_tasks
