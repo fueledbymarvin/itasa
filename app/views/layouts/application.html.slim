@@ -10,6 +10,25 @@ html lang="en"
 			script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
 
 	body
-		= render 'sessions/sessions'
-		= render 'globals/flash', :flash => flash
-		== yield
+		header
+			nav
+				#buttons
+					ul
+						li
+							span.hoverBar
+							a href="#" HOME
+						li
+							span.hoverBar
+							a href="#" ABOUT
+						li
+							span.hoverBar
+							a href="#" REGISTER!
+						li
+							span.hoverBar
+							a href="#" SCHEDULE
+						li
+							span.hoverBar
+							a href="#" CONTACT
+			#bg
+		#container
+			== yield
