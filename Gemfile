@@ -21,7 +21,6 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'headless'
-  gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'passenger'
   gem 'spork'
@@ -30,12 +29,11 @@ group :development, :test do
 
   #guard!
   gem 'guard-rspec'
-  gem 'guard-cucumber'
   gem 'guard-spork'
   gem 'guard-livereload'
   gem 'rack-livereload'
   gem 'guard-bundler'
-  gem 'guard-passenger'
+  gem 'guard-rails'
 end
 
 # Gems used only for assets and not required

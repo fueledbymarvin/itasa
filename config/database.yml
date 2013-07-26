@@ -32,6 +32,3 @@ test: &test
   username: postgres
   password: hackEsack7
   database: itasa-test
-
-cucumber:
-  <<: *test
