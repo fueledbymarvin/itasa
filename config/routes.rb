@@ -5,6 +5,11 @@ Itasa::Application.routes.draw do
   match "/auth/:provider/callback" => "sessions#create"
   match "/signout" => "sessions#destroy", :as => :signout
 
+  match "/about" => "static_pages#about"
+  match "/register" => "static_pages#register"
+  match "/schedule" => "static_pages#schedule"
+  match "/contact" => "static_pages#contact"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

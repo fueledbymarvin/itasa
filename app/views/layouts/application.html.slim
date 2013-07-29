@@ -5,30 +5,34 @@ html lang="en"
 		title = yield(:title)
 		= stylesheet_link_tag "application", :media => "all"
 		= javascript_include_tag "application"
+		- if @intro
+			= javascript_include_tag "start/jquery.queryloader2"
 		= csrf_meta_tags
 		/[if IE]
 			script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"
 
 	body
 		header
+			#mobile
+				p &#9776;
 			nav
 				#buttons
 					ul
 						li
 							span.hoverBar
-							a href="#" HOME
+							a href="/" HOME
 						li
 							span.hoverBar
-							a href="#" ABOUT
+							a href="/about" ABOUT
 						li
 							span.hoverBar
-							a href="#" REGISTER!
+							a href="/register" REGISTER!
 						li
 							span.hoverBar
-							a href="#" SCHEDULE
+							a href="/schedule" SCHEDULE
 						li
 							span.hoverBar
-							a href="#" CONTACT
+							a href="/contact" CONTACT
 			#bg
 		#container
 			== yield

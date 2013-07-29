@@ -1,4 +1,15 @@
 $(document).ready(function() {
+	$('nav').pjax('a', '#container');
+
+	var pages = ["/", "/about", "/register", "/schedule", "/contact"];
+	$(document).on('pjax:start', function() {
+		changeBg(pages.indexOf(window.location.pathname))();
+	});
+
+	$("#mobile p").click(function() {
+		$("nav").css("display", "block");
+	});
+
 	function changeBg(pos) {
 		return function() {
 			for(var i = 0; i < $("nav li a").length; i++) {
