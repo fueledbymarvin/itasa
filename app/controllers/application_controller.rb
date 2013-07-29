@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :intro
 
   def intro
-    if session[:intro].nil?
+    if session[:intro] != "done"
       @intro = true
       session[:intro] = "done"
     else

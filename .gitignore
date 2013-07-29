@@ -29,5 +29,3 @@ rerun.txt
 capybara-*.html
 
 bash.exe.stackdump
-
-config/database.yml
