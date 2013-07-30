@@ -33,6 +33,7 @@ jQuery ->
 						.off('mouseover')
 						.off('mouseout')
 			$('#bg').css "background-color": bgColors[pos]
+			$('#m-overlay').trigger 'click'
 
 	for i in [0...links.length]
 		$(hover[i]).css "background-color": buttonColors[i]
@@ -40,5 +41,24 @@ jQuery ->
 			.mouseover(overButton(i))
 			.mouseout(outButton(i))
 
+	$(links[0]).trigger 'click'
+
 	$(document).on 'pjax:start', ->
 		do changeBg pages.indexOf(window.location.pathname)
+
+	#mobile
+	$('#mobile p').click ->
+		$('nav').animate { right: "-10%" }, { duration: 700, easing: "easeInOutBack" }
+		$('#m-overlay').css display: "block"
+		$('#m-overlay').click ->
+			$('nav').animate { right: "-42%" }, { duration: 700, easing: "easeInOutBack" }
+			$(this).css display: "none"
+			$(this).off 'click'
+
+	$(window).resize ->
+		if $(window).width() > 400
+			$('nav').css { right: "0" }
+			$('#m-overlay').off 'click'
+			$('#m-overlay').css display: "none"
+		else
+			$('nav').css { right: "-42%" }
