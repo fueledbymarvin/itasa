@@ -137,18 +137,18 @@ nav, #mobile {
 	#hex-front {
 		.hex-top {
 			width: 0;
-			border-bottom: 30px solid #4ECDC4;
+			border-bottom: 30px solid #FFFFFF;
 			border-left: 52px solid transparent;
 			border-right: 52px solid transparent;
 		}
 		.hex-middle {
 			width: 104px;
 			height: 60px;
-			background-color: #4ECDC4;
+			background-color: #FFFFFF;
 		}
 		.hex-bottom {
 			width: 0;
-			border-top: 30px solid #4ECDC4;
+			border-top: 30px solid #FFFFFF;
 			border-left: 52px solid transparent;
 			border-right: 52px solid transparent;
 		}
@@ -157,18 +157,18 @@ nav, #mobile {
 		@include transform( rotateY(180deg) );
 		.hex-top {
 			width: 0;
-			border-bottom: 30px solid #FF6B6B;
+			border-bottom: 30px solid #FFFFFF;
 			border-left: 52px solid transparent;
 			border-right: 52px solid transparent;
 		}
 		.hex-middle {
 			width: 104px;
 			height: 60px;
-			background-color: #FF6B6B;
+			background-color: #FFFFFF;
 		}
 		.hex-bottom {
 			width: 0;
-			border-top: 30px solid #FF6B6B;
+			border-top: 30px solid #FFFFFF;
 			border-left: 52px solid transparent;
 			border-right: 52px solid transparent;
 		}

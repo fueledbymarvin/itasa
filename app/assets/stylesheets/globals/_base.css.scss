@@ -57,12 +57,16 @@ header, #bg {
 	}
 	#bottom {
 		position: relative;
-		height: 900px;
 		width: 100%;
 		background-color: $lightColor;
 		border-bottom-left-radius: 1em;
 		border-bottom-right-radius: 1em;
 	}
+}
+
+//REMOVE
+#placeholder {
+	height: 900px;
 }
 
 footer {

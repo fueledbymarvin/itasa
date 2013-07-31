@@ -1,17 +1,16 @@
 jQuery ->
-	#$('nav').pjax 'a', '#container'
 
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
 	
-	bgColors = buttonColors = ["#00A0B0", "#6A4A3C", "#CC333F", "#EB6841", "#EDC951"]
+	navColors = ["#1693A7", "#FC354C", "#E6781E", "#C8CF02", "#F8FCC1"]
 	defaultColor = "#E1E6E7"
 
-	links = $("nav li a")
-	hover = $(".hoverBar")
+	links = $('nav li a')
+	hover = $('.hoverBar')
 
 	overButton = (pos) ->
 		->
-			$(this).css color: buttonColors[pos]
+			$(this).css color: navColors[pos]
 			$('.hoverBar:eq(' + pos + ')').css height: "5px"
 
 	outButton = (pos) ->
@@ -29,13 +28,28 @@ jQuery ->
 						.on('mouseout', outButton(i))
 				else
 					$(hover[i]).css height: "5px"
-					$(links[i]).css(color: buttonColors[pos])
+					$(links[i]).css(color: navColors[pos])
 						.off('mouseover')
 						.off('mouseout')
 			$('#m-overlay').trigger 'click'
 
 	placeHex = ->
 		$('#hex-container').css { top: ( $("#top").height() - $('#hex-container').height() / 2 ) + "px" }
+
+	colorHex = (side, pos) ->
+		$("#hex-#{side} .hex-top").css { borderBottomColor: navColors[pos] }
+		$("#hex-#{side} .hex-middle").css { backgroundColor: navColors[pos] }
+		$("#hex-#{side} .hex-bottom").css { borderTopColor: navColors[pos]  }
+
+	colorHex("front", pages.indexOf(window.location.pathname))
+
+	flipHex = (pos) ->
+		if $("#hex").hasClass("flipped")
+			colorHex("front", pos)
+			$("#hex").removeClass("flipped")
+		else
+			colorHex("back", pos)
+			$("#hex").addClass("flipped")
 
 	changing = false
 
@@ -53,40 +67,43 @@ jQuery ->
 						$('#top').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad'
 						$('#bottom').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad', ->
 							$('#container').css { display: "none" }
-							$('#top').css { height: hTop + "px", top: 0 }
-							$('#bottom').css { height: hBottom + "px", top: 0 }
+							$('#top').css { height: "auto", top: 0 }
+							$('#bottom').css { height: "auto", top: 0 }
 							$.pjax { url: target, container: '#container' }
 
 	initNav = ->
 		for i in [0...links.length]
-			$(hover[i]).css "background-color": buttonColors[i]
+			$(hover[i]).css "background-color": navColors[i]
 			$(links[i]).mouseover(overButton(i))
 			$(links[i]).mouseout(outButton(i))
 			$(links[i]).click(changeBg(i))
 		initLinks()
-			
 
 	initNav()
 
 	do changeBg pages.indexOf(window.location.pathname)
 
-	$(document).on 'pjax:success', ->
+	$(document).on 'pjax:end', ->
 		$('#top img').load ->
+			do changeBg pages.indexOf(window.location.pathname)
 			$('#container').css { display: "block" }
 			hTop = $('#top').height()
 			hBottom = $('#bottom').height()
 			$('#top').css { height: 0, top: hTop + "px" }
 			$('#top img').css { height: 0 }
 			$('#bottom').css { height: 0, top: hTop + "px" }
-			$('#hex').addClass('flipped')
+			flipHex(pages.indexOf(window.location.pathname));
 			$('#top img').delay(1000).animate { height: hTop + "px" }
 			$('#top').delay(1000).animate { height: hTop + "px", top: 0 }, 1000, 'easeInOutQuad'
 			$('#bottom').delay(1000).animate { height: hBottom + "px", top: 0 }, 1000, 'easeInOutQuad', ->
+				$('#top').css { height: "auto" }
+				$('#top img').css { height: "auto" }
+				$('#bottom').css { height: "auto" }
 				changing = false
 
-	$(document).on 'pjax:end', ->
-		#FIXXXXXXXXXXXXXXXXX to make back work
-		do changeBg pages.indexOf(window.location.pathname)
+	# $(document).on 'pjax:end', ->
+	# 	### FIX BACK TO FLIP HEXAGON ###
+	# 	do changeBg pages.indexOf(window.location.pathname)
 
 	#mobile
 	$('#mobile p').click ->

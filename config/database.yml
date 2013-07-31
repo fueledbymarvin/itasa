@@ -8,7 +8,7 @@ development:
   adapter: postgresql
   host: localhost
   username: postgres
-  password: hackEsack7
+  password: zanzibar
   database: itasa-dev
 
 # development:
@@ -30,5 +30,5 @@ test: &test
   adapter: postgresql
   host: localhost
   username: postgres
-  password: hackEsack7
+  password: zanzibar
   database: itasa-test
