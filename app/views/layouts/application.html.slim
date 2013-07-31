@@ -35,9 +35,19 @@ html lang="en"
 							span.hoverBar
 							a href="/contact" CONTACT
 			#bg
-		#subtitle
-			.hex
-				p H
+		#hex-container
+			#hex
+				#hex-front.hex-wrapper
+					.hex-top
+					.hex-middle
+						= image_tag "minilogo.png"
+					.hex-bottom
+				#hex-back.hex-wrapper
+					.hex-top
+					.hex-middle
+						= image_tag "minilogo.png"
+					.hex-bottom
+
 		#container
 			== yield
 		//footer

@@ -101,45 +101,76 @@ nav, #mobile {
 	}
 }
 
-#subtitle {
+#hex-container {
 	position: absolute;
 	margin-top: 100px;
 	left: 50%;
 	@include transform( translate(-50%, 0) );
 	z-index: 200;
-	p {
-		font-size: 5em;
-		font-family: 'BebasNeueRegular';
-		color: $darkColor;
+	width: 104px;
+	height: 120px;
+	perspective: 800px;
+	font-size: 5em;
+	font-family: 'BebasNeueRegular';
+	color: $darkColor;
+	text-align: center;
+	img {
+		height: 60px;
+	}
+	#hex {
 		position: absolute;
-		left: 35px;
-		top: -5px;
-		z-index: 100;
+		@include transform-style( preserve-3d );
+		@include transition-property( transform );
+		@include transition-duration( 1s );
+		@include transform-origin( right center);
+		width: 100%;
+		height: 100%;
 	}
-	.hex:before {
-	    content: "";
-	    width: 0; height: 0;
-	    border-bottom: 30px solid #00A0B0;
-	    border-left: 52px solid transparent;
-	    border-right: 52px solid transparent;
-	    position: absolute;
-	    top: -30px;
+	#hex.flipped {
+		@include transform( translateX(-100%) rotateY(180deg) );
 	}
-	.hex {
-	    margin-top: 30px;
-	    width: 104px;
-	    height: 60px;
-	    background-color: #00A0B0;
-	    position: relative;
+	.hex-wrapper {
+		display: block;
+		position: absolute;
+		@include backface-visibility( hidden );
 	}
-	.hex:after {
-	    content: " ";
-	    width: 0; height: 0;
-	    position: absolute;
-	    bottom: -30px;
-	    left: 0;
-	    border-top: 30px solid #00A0B0;
-	    border-left: 52px solid transparent;
-	    border-right: 52px solid transparent;
+	#hex-front {
+		.hex-top {
+			width: 0;
+			border-bottom: 30px solid #4ECDC4;
+			border-left: 52px solid transparent;
+			border-right: 52px solid transparent;
+		}
+		.hex-middle {
+			width: 104px;
+			height: 60px;
+			background-color: #4ECDC4;
+		}
+		.hex-bottom {
+			width: 0;
+			border-top: 30px solid #4ECDC4;
+			border-left: 52px solid transparent;
+			border-right: 52px solid transparent;
+		}
+	}
+	#hex-back {
+		@include transform( rotateY(180deg) );
+		.hex-top {
+			width: 0;
+			border-bottom: 30px solid #FF6B6B;
+			border-left: 52px solid transparent;
+			border-right: 52px solid transparent;
+		}
+		.hex-middle {
+			width: 104px;
+			height: 60px;
+			background-color: #FF6B6B;
+		}
+		.hex-bottom {
+			width: 0;
+			border-top: 30px solid #FF6B6B;
+			border-left: 52px solid transparent;
+			border-right: 52px solid transparent;
+		}
 	}
 }

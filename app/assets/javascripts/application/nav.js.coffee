@@ -35,7 +35,27 @@ jQuery ->
 			$('#m-overlay').trigger 'click'
 
 	placeHex = ->
-		$('#subtitle').css { top: ( $("#top").height() - $('#subtitle').height() / 3 * 2 ) + "px" }
+		$('#hex-container').css { top: ( $("#top").height() - $('#hex-container').height() / 2 ) + "px" }
+
+	changing = false
+
+	initLinks = ->
+		for i in [0...links.length]
+			$(links[i]).click (e) ->
+				e.preventDefault()
+				if not changing
+					changing = true
+					target = $(this).attr 'href'
+					$('html, body').animate { scrollTop: 0 }, 600, 'easeInOutQuad'
+					if target isnt window.location.pathname
+						hTop = $('#top').height()
+						hBottom = $('#top').height()
+						$('#top').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad'
+						$('#bottom').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad', ->
+							$('#container').css { display: "none" }
+							$('#top').css { height: hTop + "px", top: 0 }
+							$('#bottom').css { height: hBottom + "px", top: 0 }
+							$.pjax { url: target, container: '#container' }
 
 	initNav = ->
 		for i in [0...links.length]
@@ -43,16 +63,8 @@ jQuery ->
 			$(links[i]).mouseover(overButton(i))
 			$(links[i]).mouseout(outButton(i))
 			$(links[i]).click(changeBg(i))
-			$(links[i]).click (e) ->
-				e.preventDefault()
-				target = $(this).attr 'href'
-				$('html, body').animate { scrollTop: 0 }, 600, 'easeInOutQuad'
-				if target isnt window.location.pathname
-					h = $('#top').height()
-					$('#top').animate { height: 0, top: h + "px" }, 1000, 'easeInOutQuad'
-					$('#bottom').animate { height: 0, top: h + "px" }, 1000, 'easeInOutQuad', ->
-						$('#container').css { display: "none" }
-						$.pjax { url: target, container: '#container' }
+		initLinks()
+			
 
 	initNav()
 
@@ -64,14 +76,16 @@ jQuery ->
 			hTop = $('#top').height()
 			hBottom = $('#bottom').height()
 			$('#top').css { height: 0, top: hTop + "px" }
+			$('#top img').css { height: 0 }
 			$('#bottom').css { height: 0, top: hTop + "px" }
-			$('#top').animate { height: hTop + "px", top: 0 }, 1000, 'easeInOutQuad'
-			$('#bottom').animate { height: hBottom + "px", top: 0 }, 1000, 'easeInOutQuad'
+			$('#hex').addClass('flipped')
+			$('#top img').delay(1000).animate { height: hTop + "px" }
+			$('#top').delay(1000).animate { height: hTop + "px", top: 0 }, 1000, 'easeInOutQuad'
+			$('#bottom').delay(1000).animate { height: hBottom + "px", top: 0 }, 1000, 'easeInOutQuad', ->
+				changing = false
 
 	$(document).on 'pjax:end', ->
 		#FIXXXXXXXXXXXXXXXXX to make back work
-		$('#top').css { top: 0 }
-		$('#bottom').css { top: 0 }
 		do changeBg pages.indexOf(window.location.pathname)
 
 	#mobile
