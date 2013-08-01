@@ -8,6 +8,9 @@ jQuery ->
 	links = $('nav li a')
 	hover = $('.hoverBar')
 
+	getPage = ->
+		pages.indexOf(window.location.pathname)
+
 	overButton = (pos) ->
 		->
 			$(this).css color: navColors[pos]
@@ -41,7 +44,7 @@ jQuery ->
 		$("#hex-#{side} .hex-middle").css { backgroundColor: navColors[pos] }
 		$("#hex-#{side} .hex-bottom").css { borderTopColor: navColors[pos]  }
 
-	colorHex("front", pages.indexOf(window.location.pathname))
+	colorHex("front", getPage())
 
 	flipHex = (pos) ->
 		if $("#hex").hasClass("flipped")
@@ -52,6 +55,7 @@ jQuery ->
 			$("#hex").addClass("flipped")
 
 	changing = false
+	flipped = false
 
 	initLinks = ->
 		for i in [0...links.length]
@@ -60,12 +64,12 @@ jQuery ->
 				if not changing
 					changing = true
 					target = $(this).attr 'href'
-					$('html, body').animate { scrollTop: 0 }, 600, 'easeInOutQuad'
+					$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad'
 					if target isnt window.location.pathname
 						hTop = $('#top').height()
 						hBottom = $('#top').height()
-						$('#top').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad'
-						$('#bottom').animate { height: 0, top: hTop + "px" }, 800, 'easeInOutQuad', ->
+						$('#top').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad'
+						$('#bottom').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad', ->
 							$('#container').css { display: "none" }
 							$('#top').css { height: "auto", top: 0 }
 							$('#bottom').css { height: "auto", top: 0 }
@@ -81,29 +85,39 @@ jQuery ->
 
 	initNav()
 
-	do changeBg pages.indexOf(window.location.pathname)
+	loadIn = ->
+		$('#container').css { display: "block" }
+		hTop = $('#top').height()
+		hBottom = $('#bottom').height()
+		$('#top').css { height: 0, top: hTop + "px" }
+		$('#top img').css { height: 0 }
+		$('#bottom').css { height: 0, top: hTop + "px" }
+		flipHex(getPage());
+		$('#top img').delay(500).animate { height: hTop + "px" }
+		$('#top').delay(500).animate { height: hTop + "px", top: 0 }, 600, 'easeInOutQuad'
+		$('#bottom').delay(500).animate { height: hBottom + "px", top: 0 }, 600, 'easeInOutQuad', ->
+			$('#top').css { height: "auto" }
+			$('#top img').css { height: "auto" }
+			$('#bottom').css { height: "auto" }
+			changing = false
+
+	do changeBg getPage()
 
 	$(document).on 'pjax:end', ->
-		$('#top img').load ->
-			do changeBg pages.indexOf(window.location.pathname)
-			$('#container').css { display: "block" }
-			hTop = $('#top').height()
-			hBottom = $('#bottom').height()
-			$('#top').css { height: 0, top: hTop + "px" }
-			$('#top img').css { height: 0 }
-			$('#bottom').css { height: 0, top: hTop + "px" }
-			flipHex(pages.indexOf(window.location.pathname));
-			$('#top img').delay(1000).animate { height: hTop + "px" }
-			$('#top').delay(1000).animate { height: hTop + "px", top: 0 }, 1000, 'easeInOutQuad'
-			$('#bottom').delay(1000).animate { height: hBottom + "px", top: 0 }, 1000, 'easeInOutQuad', ->
-				$('#top').css { height: "auto" }
-				$('#top img').css { height: "auto" }
-				$('#bottom').css { height: "auto" }
-				changing = false
+		console.log("end")
+		do changeBg getPage()
+		if $('#top').height() is 0
+			$('#top img').load ->
+				loadIn()
+		else
+			loadIn()
+			
 
 	# $(document).on 'pjax:end', ->
-	# 	### FIX BACK TO FLIP HEXAGON ###
-	# 	do changeBg pages.indexOf(window.location.pathname)
+	# 	if flipped
+	# 		flipped = false
+	# 	else
+	# 		flipHex(getPage())
 
 	#mobile
 	$('#mobile p').click ->

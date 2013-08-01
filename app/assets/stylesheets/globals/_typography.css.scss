@@ -1,3 +1,10 @@
+body {
+    font-size: 16px !important;
+    @media only screen and (max-width: 600px) {
+        font-size: 12px !important;
+    }
+}
+
 @font-face {
     font-family: 'BebasNeueRegular';
     src: font-url('BebasNeue-webfont.eot');
