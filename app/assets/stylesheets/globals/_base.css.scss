@@ -46,36 +46,20 @@ header, #bg {
 }
 
 #container {
-	position: relative;
-	top: 5.6em;
-	width: 60%;
-	left: 20%;
-	@media only screen and (max-width: 1000px) {
-		width: 70%;
-		left: 15%;
-	}
-	@media only screen and (max-width: 800px) {
-		width: 80%;
-		left: 10%;
-	}
+	width: 100%;
 	#top {
 		position: relative;
 	}
 	#top img {
 		width: 100%;
 		display: block;
-		border-top-left-radius: 1em;
-		border-top-right-radius: 1em;
 	}
 	#bottom {
 		position: relative;
+		top: 1em;
 		width: 100%;
-		background-color: $lightColor;
-		border-bottom-left-radius: 1em;
-		border-bottom-right-radius: 1em;
+		background-color: $darkColor;
 	}
-	//for footer
-	overflow: auto;
 }
 
 //REMOVE
@@ -84,8 +68,8 @@ header, #bg {
 }
 
 footer {
+	top: 1em;
 	position: relative;
-	top: 7.7em;
 	height: 3.5em;
 	width: 100%;
 	background-color: $lightColor;

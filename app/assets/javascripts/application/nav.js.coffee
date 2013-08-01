@@ -37,22 +37,47 @@ jQuery ->
 			$('#m-overlay').trigger 'click'
 
 	placeHex = ->
-		$('#hex-container').css { top: ( $("#top").height() - $('#hex-container').height() / 2 ) + "px" }
+		$('#hex-line').css { top: $("#top").height() + "px" }
+		$('#hex-container').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-container').height() / 2 ) + "px" }
+		$('#hex-bg').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-bg').height() / 2 ) + "px" }
 
-	colorHex = (side, pos) ->
-		$("#hex-#{side} .hex-top").css { borderBottomColor: navColors[pos] }
-		$("#hex-#{side} .hex-middle").css { backgroundColor: navColors[pos] }
-		$("#hex-#{side} .hex-bottom").css { borderTopColor: navColors[pos]  }
+	$('#top img').load ->
+		placeHex()
 
-	colorHex("front", getPage())
+	$(window).resize ->
+		placeHex()
+
+	recolor = (hex, lum) ->
+		hex = String(hex).replace(/[^0-9a-f]/gi, '')
+		if hex.length < 6
+			hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+		lum = lum || 0
+		rgb = "#"
+		for i in [0...3]
+			c = parseInt(hex.substr(i*2,2), 16)
+			c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16)
+			rgb += ("00"+c).substr(c.length)
+		rgb
+
+	colorHex = (side, color) ->
+		$("#hex-#{side} .hex-top").css { borderBottomColor: color }
+		$("#hex-#{side} .hex-middle").css { backgroundColor: color }
+		$("#hex-#{side} .hex-bottom").css { borderTopColor: color  }
+
+	darkerFactor = -0.07
+	colorHex("front", navColors[getPage()])
+	colorHex("bg", recolor(navColors[getPage()], darkerFactor))
+	$('#hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
 
 	flipHex = (pos) ->
 		if $("#hex").hasClass("flipped")
-			colorHex("front", pos)
+			colorHex("front", navColors[getPage()])
 			$("#hex").removeClass("flipped")
 		else
-			colorHex("back", pos)
+			colorHex("back", navColors[getPage()])
 			$("#hex").addClass("flipped")
+		colorHex("bg", recolor(navColors[getPage()], darkerFactor))
+		$('#hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
 
 	changing = false
 	flipped = false
@@ -61,19 +86,19 @@ jQuery ->
 		for i in [0...links.length]
 			$(links[i]).click (e) ->
 				e.preventDefault()
-				if not changing
-					changing = true
-					target = $(this).attr 'href'
-					$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad'
-					if target isnt window.location.pathname
-						hTop = $('#top').height()
-						hBottom = $('#top').height()
-						$('#top').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad'
-						$('#bottom').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad', ->
-							$('#container').css { display: "none" }
-							$('#top').css { height: "auto", top: 0 }
-							$('#bottom').css { height: "auto", top: 0 }
-							$.pjax { url: target, container: '#container' }
+				# if not changing
+				# 	changing = true
+				target = $(this).attr 'href'
+				# 	$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad'
+				# 	if target isnt window.location.pathname
+				# 		hTop = $('#top').height()
+				# 		hBottom = $('#top').height()
+				# 		$('#top').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad'
+				# 		$('#bottom').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad', ->
+				# 			$('#container').css { display: "none" }
+				# 			$('#top').css { height: "auto", top: 0 }
+				# 			$('#bottom').css { height: "auto", top: 0 }
+				$.pjax { url: target, container: '#container' }
 
 	initNav = ->
 		for i in [0...links.length]
@@ -95,7 +120,7 @@ jQuery ->
 		flipHex(getPage());
 		$('#top img').delay(500).animate { height: hTop + "px" }
 		$('#top').delay(500).animate { height: hTop + "px", top: 0 }, 600, 'easeInOutQuad'
-		$('#bottom').delay(500).animate { height: hBottom + "px", top: 0 }, 600, 'easeInOutQuad', ->
+		$('#bottom').delay(500).animate { height: hBottom + "px", top: $("#hex-line").height() + "px" }, 600, 'easeInOutQuad', ->
 			$('#top').css { height: "auto" }
 			$('#top img').css { height: "auto" }
 			$('#bottom').css { height: "auto" }
@@ -104,38 +129,18 @@ jQuery ->
 	do changeBg getPage()
 
 	$(document).on 'pjax:end', ->
-		console.log("end")
 		do changeBg getPage()
-		if $('#top').height() is 0
-			$('#top img').load ->
-				loadIn()
-		else
-			loadIn()
-			
-
-	# $(document).on 'pjax:end', ->
-	# 	if flipped
-	# 		flipped = false
-	# 	else
-	# 		flipHex(getPage())
+		# if $('#top').height() is 0
+		# 	$('#top img').load ->
+		# 		loadIn()
+		# else
+		loadIn()
 
 	#mobile
 	$('#mobile p').click ->
-		$('nav').animate { right: "-10%" }, { duration: 700, easing: "easeInOutBack" }
+		$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
 		$('#m-overlay').css display: "block"
 		$('#m-overlay').click ->
-			$('nav').animate { right: "-42%" }, { duration: 700, easing: "easeInOutBack" }
+			$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
 			$(this).css display: "none"
 			$(this).off 'click'
-
-	$('#top img').load ->
-		placeHex()
-
-	$(window).resize ->
-		placeHex()
-		if $(window).width() > 400
-			$('nav').css { right: "0" }
-			$('#m-overlay').off 'click'
-			$('#m-overlay').css display: "none"
-		else
-			$('nav').css { right: "-42%" }
