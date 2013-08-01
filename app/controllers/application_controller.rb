@@ -1,16 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper_method :current_user
-  before_filter :intro
-
-  def intro
-    if session[:intro] != "done"
-      @intro = true
-      session[:intro] = "done"
-    else
-      @intro = false
-    end
-  end
 
   private
   def current_user

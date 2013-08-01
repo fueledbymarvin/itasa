@@ -94,12 +94,12 @@
                 qLsubtitle.css({display: "block", marginTop: subtitleHeight / 3 + "px", opacity: 0});
                 qLimg.css({display: "block", width: "0%", opacity: 0});
                 qLinprogress.css({display: "block", marginTop: "-" + inprogressHeight * 1.1 + "px", opacity: 0});
-                qLwork.delay(100).animate({marginTop: workHeight / 3 + "px"}, 300);
-                qLimg.delay(200).animate({opacity: 1, marginTop: "-" + workHeight + "px", width: "80%", left: "10%"}, {duration: 200, complete: function() {
-                    qLinprogress.delay(300).animate({left: "79%", opacity: 1}, 300);
-                    qLimg.delay(300).animate({left: "3%"}, { duration: 300, complete: function() {
-                        qLsubtitle.delay(200).animate({marginTop: subtitleHeight / 2 + "px", opacity: 1}, {duration: 500, complete: function() {
-                            qLwork.delay(800).animate({width: 0, height: 0, left: "50%", top: "50%"}, {duration: 300, step: function() {
+                qLwork.animate({marginTop: workHeight / 3 + "px"}, 300);
+                qLimg.delay(100).animate({opacity: 1, marginTop: "-" + workHeight + "px", width: "80%", left: "10%"}, {duration: 200, complete: function() {
+                    qLinprogress.delay(200).animate({left: "79%", opacity: 1}, 300);
+                    qLimg.delay(200).animate({left: "3%"}, { duration: 300, complete: function() {
+                        qLsubtitle.delay(100).animate({marginTop: subtitleHeight / 2 + "px", opacity: 1}, {duration: 500, complete: function() {
+                            qLwork.delay(1000).animate({width: 0, height: 0, left: "50%", top: "50%"}, {duration: 300, step: function() {
                                 qLimg.css({marginTop: "-" + $("#workImg").height() + "px"});
                                 qLinprogress.css({marginTop: "-" + $("#inprogressImg").height() * 1.1 + "px"});
                                 qLsubtitle.css({marginTop: subtitleHeight / 2 + "px"});
@@ -434,10 +434,11 @@ $(document).ready(function () {
     });
     $("body").queryLoader2({onComplete: function() {
         $("<div id='circleWindow'><div id='circleReveal'></div></div>").appendTo($("body"));
-        $("#logo").css({marginTop: "-" + $("#logo").height() / 2 + "px"});
         $("nav").css({marginTop: "-"  + $("nav").height() + "px"});
         $("#circleWindow").css({
             position: "absolute",
+            top: 0,
+            left: 0,
             width: "100%",
             height: "100%",
             overflow: "hidden",
@@ -456,8 +457,8 @@ $(document).ready(function () {
             left: $(window).width() / 2 - $("#circleReveal").outerWidth() / 2 + "px"
         });
         var finalRadius = Math.ceil(Math.sqrt(Math.pow($(window).width(), 2) + Math.pow($(window).height(), 2)));
-        $("nav").delay(700).animate({marginTop: 0}, 500);
-        $("#circleReveal").delay(200).animate({
+        $("nav").delay(500).animate({marginTop: 0}, 500);
+        $("#circleReveal").delay(100).animate({
             width: finalRadius + "px",
             height: finalRadius + "px"
         }, {
@@ -470,9 +471,6 @@ $(document).ready(function () {
             },
             complete: function() {
                 $("#circleWindow").remove();
-                $(window).resize(function() {
-                    $("#logo").css({marginTop: "-" + $("#logo").height() / 2 + "px"});
-                });
                 $("body").css({
                     overflow: "visible"
                 });
