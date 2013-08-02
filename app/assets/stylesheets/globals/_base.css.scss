@@ -34,13 +34,6 @@ header, #bg {
 	@include transition (all .2s linear);
 }
 
-#logo {
-	position: absolute;
-	width: 60%;
-	top: 50%;
-	left: 20%;
-}
-
 #wrapper {
 	min-height: 100%;
 }
