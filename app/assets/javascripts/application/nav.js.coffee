@@ -89,7 +89,18 @@ jQuery ->
 				# if not changing
 				# 	changing = true
 				target = $(this).attr 'href'
-				# 	$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad'
+				$('#desaturate').css { opacity: 1 }
+				$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad', ->
+					$("body").css { overflow: "hidden" }
+					placeHex()
+					$('#hex-bg, #hex-line').addClass("prev")
+					$('#main.container').attr("id", "prev")
+					main = $('<div id="main" class="container"></div>')
+					main.css { zIndex: 197, position: "absolute" }
+					main.appendTo($('#wrapper'))
+					$.pjax { url: target, container: '#main' }
+					#add new hex bg/line
+					#figure out why there's a random extra container
 				# 	if target isnt window.location.pathname
 				# 		hTop = $('#top').height()
 				# 		hBottom = $('#top').height()
@@ -98,7 +109,6 @@ jQuery ->
 				# 			$('#container').css { display: "none" }
 				# 			$('#top').css { height: "auto", top: 0 }
 				# 			$('#bottom').css { height: "auto", top: 0 }
-				$.pjax { url: target, container: '#container' }
 
 	initNav = ->
 		for i in [0...links.length]
@@ -130,6 +140,7 @@ jQuery ->
 
 	$(document).on 'pjax:end', ->
 		do changeBg getPage()
+		# $("#prev").remove()
 		# if $('#top').height() is 0
 		# 	$('#top img').load ->
 		# 		loadIn()

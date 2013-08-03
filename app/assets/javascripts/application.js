@@ -14,5 +14,5 @@
 //= require jquery_ujs
 //= require jquery.pjax
 //= require jquery.easing
-//= require_tree ./start
+// require_tree ./start
 //= require_tree ./application

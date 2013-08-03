@@ -38,7 +38,26 @@ header, #bg {
 	min-height: 100%;
 }
 
-#container {
+.prev {
+	z-index: 195 !important;
+}
+
+#prev {
+	z-index: 194;
+	position: absolute;
+}
+
+#desaturate {
+	opacity: 0;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	background-color: rgba(222, 222, 222, 0.8);
+	z-index: 196;
+	@include transition (all 0.3s ease-out);
+}
+
+.container {
 	width: 100%;
 	#top {
 		position: relative;
