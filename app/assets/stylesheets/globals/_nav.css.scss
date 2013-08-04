@@ -85,26 +85,6 @@ nav {
 	border-right: 3.25em solid transparent;
 }
 
-#hex-line {
-	position: absolute;
-	width: 100%;
-	background-color: #FFFFFF;
-	height: 1em;
-	z-index: 198;
-	@include background-image(linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
-						transparent 75%, transparent));
-	background-size: 50px 50px;
-}
-
-#hex-bg {
-	position: absolute;
-	font-size: 1.2em;
-	z-index: 199;
-	left: 50%;
-	@include transform( translate(-50%, 0) );
-}
-
 #hex-container {
 	position: absolute;
 	left: 50%;

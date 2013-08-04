@@ -37,9 +37,7 @@ jQuery ->
 			$('#m-overlay').trigger 'click'
 
 	placeHex = ->
-		$('#hex-line').css { top: $("#top").height() + "px" }
 		$('#hex-container').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-container').height() / 2 ) + "px" }
-		$('#hex-bg').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-bg').height() / 2 ) + "px" }
 
 	$('#top img').load ->
 		placeHex()
@@ -59,15 +57,19 @@ jQuery ->
 			rgb += ("00"+c).substr(c.length)
 		rgb
 
-	colorHex = (side, color) ->
-		$("#hex-#{side} .hex-top").css { borderBottomColor: color }
-		$("#hex-#{side} .hex-middle").css { backgroundColor: color }
-		$("#hex-#{side} .hex-bottom").css { borderTopColor: color  }
+	colorHex = (side, color, section = "") ->
+		$("#{section} #hex-#{side} .hex-top").css { borderBottomColor: color }
+		$("#{section} #hex-#{side} .hex-middle").css { backgroundColor: color }
+		$("#{section} #hex-#{side} .hex-bottom").css { borderTopColor: color  }
 
+
+	colorMiddle = ->
+		colorHex("bg", recolor(navColors[getPage()], darkerFactor), "#main")
+		$('#main #hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
+	
 	darkerFactor = -0.07
 	colorHex("front", navColors[getPage()])
-	colorHex("bg", recolor(navColors[getPage()], darkerFactor))
-	$('#hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
+	colorMiddle()
 
 	flipHex = (pos) ->
 		if $("#hex").hasClass("flipped")
@@ -76,8 +78,6 @@ jQuery ->
 		else
 			colorHex("back", navColors[getPage()])
 			$("#hex").addClass("flipped")
-		colorHex("bg", recolor(navColors[getPage()], darkerFactor))
-		$('#hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
 
 	changing = false
 	flipped = false
@@ -86,29 +86,21 @@ jQuery ->
 		for i in [0...links.length]
 			$(links[i]).click (e) ->
 				e.preventDefault()
-				# if not changing
-				# 	changing = true
 				target = $(this).attr 'href'
-				$('#desaturate').css { opacity: 1 }
-				$('html, body').animate { scrollTop: 0 }, 300, 'easeInOutQuad', ->
-					$("body").css { overflow: "hidden" }
-					placeHex()
-					$('#hex-bg, #hex-line').addClass("prev")
-					$('#main.container').attr("id", "prev")
-					main = $('<div id="main" class="container"></div>')
-					main.css { zIndex: 197, position: "absolute" }
-					main.appendTo($('#wrapper'))
-					$.pjax { url: target, container: '#main' }
-					#add new hex bg/line
-					#figure out why there's a random extra container
-				# 	if target isnt window.location.pathname
-				# 		hTop = $('#top').height()
-				# 		hBottom = $('#top').height()
-				# 		$('#top').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad'
-				# 		$('#bottom').animate { height: 0, top: hTop + "px" }, 600, 'easeInOutQuad', ->
-				# 			$('#container').css { display: "none" }
-				# 			$('#top').css { height: "auto", top: 0 }
-				# 			$('#bottom').css { height: "auto", top: 0 }
+				if target isnt window.location.pathname
+					if not changing
+						changing = true
+					$('#desaturate').css { opacity: 1 }
+					$('body').animate { scrollTop: 0 }, 300, 'easeInOutQuad', ->
+						$("body").css { overflow: "hidden" }
+						placeHex()
+						$('#main.container').attr("id", "prev")
+						main = $('<div id="main" class="container"></div>')
+						main.css
+							position: "absolute"
+							width: $(window).width() + "px"
+						main.appendTo('#wrapper')
+						$.pjax { url: target, container: '#main' }
 
 	initNav = ->
 		for i in [0...links.length]
@@ -121,37 +113,53 @@ jQuery ->
 	initNav()
 
 	loadIn = ->
-		$('#container').css { display: "block" }
-		hTop = $('#top').height()
-		hBottom = $('#bottom').height()
-		$('#top').css { height: 0, top: hTop + "px" }
-		$('#top img').css { height: 0 }
-		$('#bottom').css { height: 0, top: hTop + "px" }
-		flipHex(getPage());
-		$('#top img').delay(500).animate { height: hTop + "px" }
-		$('#top').delay(500).animate { height: hTop + "px", top: 0 }, 600, 'easeInOutQuad'
-		$('#bottom').delay(500).animate { height: hBottom + "px", top: $("#hex-line").height() + "px" }, 600, 'easeInOutQuad', ->
-			$('#top').css { height: "auto" }
-			$('#top img').css { height: "auto" }
-			$('#bottom').css { height: "auto" }
-			changing = false
-
+		$("#main").wrap('<div id="circle" />')
+		$("#circle").css
+			top: $("#hex-container").offset()["top"] + $("#hex-container").height() / 2 - $("#circle").outerHeight() / 2 + "px"
+			left: $("#hex-container").offset()["left"] + $("#hex-container").width() / 2 - $("#circle").outerWidth() / 2 + "px"
+		$("#main").css
+			top: -1 * ($("#circle").offset()["top"] + 2000) + "px"
+			left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
+		finalRadius = Math.ceil(Math.sqrt(Math.pow($(window).width(), 2) + Math.pow($(window).height(), 2)))
+		options =
+			duration: 800
+			easing: 'easeInOutQuad'
+			step: ->
+				$("#circle").css
+					top: $("#hex-container").offset()["top"] + $("#hex-container").height() / 2 - $("#circle").outerHeight() / 2 + "px"
+					left: $("#hex-container").offset()["left"] + $("#hex-container").width() / 2 - $("#circle").outerWidth() / 2 + "px"
+				$("#main").css
+					top: -1 * ($("#circle").offset()["top"] + 2000) + "px"
+					left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
+			complete: ->
+				$('#desaturate').css { opacity: 0 }
+				$("body").css
+					overflow: "visible"
+				placeHex()
+				$("#prev").remove()
+				$("#main").unwrap()
+				$("#main").css
+					width: "100%"
+					top: 0
+					left: 0
+					position: "static"
+				changing = false
+		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
 	do changeBg getPage()
 
 	$(document).on 'pjax:end', ->
 		do changeBg getPage()
-		# $("#prev").remove()
-		# if $('#top').height() is 0
-		# 	$('#top img').load ->
-		# 		loadIn()
-		# else
-		loadIn()
+		colorMiddle()
+		flipHex()
+		if changing
+			loadIn()
 
 	#mobile
 	$('#mobile p').click ->
-		$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
-		$('#m-overlay').css display: "block"
-		$('#m-overlay').click ->
-			$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
-			$(this).css display: "none"
-			$(this).off 'click'
+		if !changing
+			$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
+			$('#m-overlay').css display: "block"
+			$('#m-overlay').click ->
+				$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
+				$(this).css display: "none"
+				$(this).off 'click'

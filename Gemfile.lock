@@ -273,7 +273,7 @@ DEPENDENCIES
   binding_of_caller
   bourbon
   capybara
-  coffee-rails (~> 3.2.1)
+  coffee-rails (~> 3.2.2)
   database_cleaner
   factory_girl_rails
   faker

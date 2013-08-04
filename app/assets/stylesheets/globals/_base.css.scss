@@ -38,13 +38,18 @@ header, #bg {
 	min-height: 100%;
 }
 
-.prev {
-	z-index: 195 !important;
+#prev {
+	z-index: 197;
+	position: absolute;
 }
 
-#prev {
-	z-index: 194;
-	position: absolute;
+#circle {
+	width: 0px;
+    height: 0px;
+    overflow: hidden;
+    position: absolute;
+   	border: 2000px solid transparent;
+   	border-radius: 10000px;
 }
 
 #desaturate {
@@ -53,24 +58,37 @@ header, #bg {
 	width: 100%;
 	position: absolute;
 	background-color: rgba(222, 222, 222, 0.8);
-	z-index: 196;
-	@include transition (all 0.3s ease-out);
+	z-index: 198;
+	@include transition (opacity 0.3s ease-in-out);
 }
 
 .container {
 	width: 100%;
-	#top {
-		position: relative;
-	}
+	z-index: 199;
 	#top img {
 		width: 100%;
 		display: block;
 	}
 	#bottom {
-		position: relative;
-		top: 1em;
 		width: 100%;
 		background-color: $darkColor;
+	}
+	#hex-line {
+		position: relative;
+		width: 100%;
+		background-color: #FFFFFF;
+		height: 1em;
+		@include background-image(linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
+							transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
+							transparent 75%, transparent));
+		background-size: 50px 50px;
+	}
+	#hex-bg {
+		position: absolute;
+		top: 0.41666666666em;
+		font-size: 1.2em;
+		left: 50%;
+		@include transform( translate(-50%, -50%) );
 	}
 }
 
@@ -80,7 +98,6 @@ header, #bg {
 }
 
 footer {
-	top: 1em;
 	position: relative;
 	height: 3.5em;
 	width: 100%;
