@@ -37,6 +37,23 @@ jQuery ->
 			$('#m-overlay').trigger 'click'
 
 	placeHex = ->
+		imgH = $(window).height() / 2.61
+		imgW = $(window).width()
+		$("#main #top").css { height: imgH + "px" }
+		if imgH > imgW / 16 * 9
+			$("#main #top img").css
+				height: imgH + "px"
+				width: "auto"
+			$("#main #top img").css
+				left: -1 * ($("#main #top img").width() - imgW) / 2 + "px";
+				top: 0
+		else
+			$("#main #top img").css
+				width: imgW + "px"
+				height: "auto"
+			$("#main #top img").css
+				top: -1 * ($("#main #top img").height() - imgH) / 2 + "px";
+				left: 0
 		$('#hex-container').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-container').height() / 2 ) + "px" }
 
 	$('#top img').load ->
@@ -113,6 +130,7 @@ jQuery ->
 	initNav()
 
 	loadIn = ->
+		colorMiddle()
 		$("#main").wrap('<div id="circle" />')
 		$("#circle").css
 			top: $("#hex-container").offset()["top"] + $("#hex-container").height() / 2 - $("#circle").outerHeight() / 2 + "px"
@@ -135,7 +153,6 @@ jQuery ->
 				$('#desaturate').css { opacity: 0 }
 				$("body").css
 					overflow: "visible"
-				placeHex()
 				$("#prev").remove()
 				$("#main").unwrap()
 				$("#main").css
@@ -143,16 +160,26 @@ jQuery ->
 					top: 0
 					left: 0
 					position: "static"
+				placeHex()
 				changing = false
+		$("#top img").load ->
+			placeHex()
 		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
+	
 	do changeBg getPage()
 
 	$(document).on 'pjax:end', ->
 		do changeBg getPage()
-		colorMiddle()
 		flipHex()
 		if changing
 			loadIn()
+		else
+			$("#main").css { display: "none" }
+			$("#main").load window.location.pathname + " #main", ->
+				colorMiddle()
+				$("#top img").load ->
+					placeHex()
+					$("#main").css { display: "block" }
 
 	#mobile
 	$('#mobile p').click ->

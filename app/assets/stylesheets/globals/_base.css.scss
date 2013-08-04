@@ -57,7 +57,7 @@ header, #bg {
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	background-color: rgba(222, 222, 222, 0.8);
+	background-color: rgba(57, 64, 69, 0.88);
 	z-index: 198;
 	@include transition (opacity 0.3s ease-in-out);
 }
@@ -65,8 +65,12 @@ header, #bg {
 .container {
 	width: 100%;
 	z-index: 199;
-	#top img {
+	#top {
 		width: 100%;
+		overflow: hidden;
+	}
+	#top img {
+		position: relative;
 		display: block;
 	}
 	#bottom {
