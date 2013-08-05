@@ -2,8 +2,9 @@ jQuery ->
 
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
 	
-	navColors = ["#1693A7", "#FC354C", "#E6781E", "#C8CF02", "#F8FCC1"]
-	defaultColor = "#E1E6E7"
+	navColors = ["#30d284", "#e86146", "#3fa9e2", "#e8566e", "#a661c2"]
+	defaultColor = "#ffffff"
+	yaleBlue = "#0f4d92"
 
 	links = $('nav li a')
 	hover = $('.hoverBar')
@@ -174,19 +175,41 @@ jQuery ->
 		if changing
 			loadIn()
 		else
-			$("#main").css { display: "none" }
-			$("#main").load window.location.pathname + " #main", ->
+			$("#wrapper").load window.location.pathname + " #main", ->
 				colorMiddle()
 				$("#top img").load ->
 					placeHex()
-					$("#main").css { display: "block" }
 
-	#mobile
-	$('#mobile p').click ->
+	openNav = ->
 		if !changing
+			$('#mobile p').fadeOut 300, ->
+				$(this).text('X')
+				$(this).fadeIn 300
+			$('#mobile').off 'click'
+			$('#mobile').click ->
+				closeNav()
+			$('#mobile').animate { right: "9em" }, { duration: 700, easing: "easeInOutBack" }
 			$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
 			$('#m-overlay').css display: "block"
 			$('#m-overlay').click ->
-				$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
-				$(this).css display: "none"
-				$(this).off 'click'
+				closeNav()
+
+	closeNav = ->
+		$('#mobile p').fadeOut 300, ->
+			$(this).text('i')
+			$(this).fadeIn 300
+		$('#mobile').animate { right: 0 }, { duration: 700, easing: "easeInOutBack" }
+		$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
+		$('#m-overlay').css display: "none"
+		$('#m-overlay').off 'click'
+		$('#mobile').off 'click'
+		$('#mobile').click ->
+			openNav()
+
+	#mobile
+	$('#mobile').on 'mouseover', ->
+		$('#mobile p').addClass('spin')
+	$('#mobile').on 'mouseout', ->
+		$('#mobile p').removeClass('spin')
+	$('#mobile').click ->
+		openNav()

@@ -4,34 +4,17 @@ html, body {
 }
 
 body {
-	background-color: #ac0;
-	@include background-image(linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%,
-						transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%,
-						transparent 75%, transparent));
-	background-size: 50px 50px;
-	//background: url(test.jpg) no-repeat center center fixed;
-	color: $darkColor;
+	color: $fgColor;
 	a {
 		text-decoration: none;
-		color: $darkColor;
+		color: $fgColor;
 	}
 }
 
-#bg {
-	background-size: cover;
-}
-
-header, #bg {
+header {
 	width: 100%;
 	height: 100%;
 	position: absolute;
-}
-
-#bg {
-	position: fixed;
-	//background-color: $darkColor;
-	//opacity: .7;
-	@include transition (all .2s linear);
 }
 
 #title, #subtitle {
@@ -48,7 +31,7 @@ header, #bg {
 	z-index: 666996;
 	font-size: 2.5em;
 	width: 5.5em;
-	background: $lightColor;
+	background: $bgColor;
 	h1 {
 		position: relative;
 		top: 0.15em;
@@ -60,7 +43,7 @@ header, #bg {
 	z-index: 666997;
 	width: 9.167em;
 	height: 1.25em;
-	background: darken($lightColor, 5%);
+	background: $mgColor;
 	h2 {
 		position: relative;
 		top: 0.2em;
@@ -90,7 +73,7 @@ header, #bg {
 	height: 100%;
 	width: 100%;
 	position: absolute;
-	background-color: rgba(57, 64, 69, 0.88);
+	background-color: rgba(255, 255, 255, 0.77);
 	z-index: 198;
 	@include transition (opacity 0.3s ease-in-out);
 }
@@ -108,7 +91,7 @@ header, #bg {
 	}
 	#bottom {
 		width: 100%;
-		background-color: $darkColor;
+		background-color: $bgColor;
 	}
 	#hex-line {
 		position: relative;
@@ -138,6 +121,6 @@ footer {
 	position: relative;
 	height: 3.5em;
 	width: 100%;
-	background-color: $lightColor;
+	background-color: $mgColor;
 	clear: both;
 }
