@@ -34,6 +34,39 @@ header, #bg {
 	@include transition (all .2s linear);
 }
 
+#title, #subtitle {
+	font-family: 'BebasNeueRegular';
+	text-align: center;
+	position: fixed;
+	left: 6%;
+	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.7);
+	text-shadow: -1px -1px rgb(0, 0, 0);
+}
+#title {
+	top: 0;
+	height: 1.2em;
+	z-index: 666996;
+	font-size: 2.5em;
+	width: 5.5em;
+	background: $lightColor;
+	h1 {
+		position: relative;
+		top: 0.15em;
+	}
+}
+#subtitle {
+	top: 2em;
+	font-size: 1.5em;
+	z-index: 666997;
+	width: 9.167em;
+	height: 1.25em;
+	background: darken($lightColor, 5%);
+	h2 {
+		position: relative;
+		top: 0.2em;
+	}
+}
+
 #wrapper {
 	min-height: 100%;
 }

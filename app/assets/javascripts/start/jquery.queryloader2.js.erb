@@ -434,7 +434,7 @@ $(document).ready(function () {
     });
     $("body").queryLoader2({onComplete: function() {
         $("<div id='circleWindow'><div id='circleReveal'></div></div>").appendTo($("body"));
-        $("nav").css({marginTop: "-"  + $("nav").height() + "px"});
+        $("#mobile").css({marginTop: "-"  + $("#mobile").height() + "px"});
         $("#circleWindow").css({
             position: "absolute",
             top: 0,
@@ -457,7 +457,7 @@ $(document).ready(function () {
             left: $(window).width() / 2 - $("#circleReveal").outerWidth() / 2 + "px"
         });
         var finalRadius = Math.ceil(Math.sqrt(Math.pow($(window).width(), 2) + Math.pow($(window).height(), 2)));
-        $("nav").delay(500).animate({marginTop: 0}, 500);
+        $("#mobile").delay(500).animate({marginTop: 0}, 500);
         $("#circleReveal").delay(100).animate({
             width: finalRadius + "px",
             height: finalRadius + "px"
