@@ -1,16 +1,32 @@
 jQuery ->
 
+	### VARIABLES ###
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
-	
 	navColors = ["#30d284", "#e86146", "#3fa9e2", "#e8566e", "#a661c2"]
 	defaultColor = "#ffffff"
 	yaleBlue = "#0f4d92"
-
 	links = $('nav li a')
 	hover = $('.hoverBar')
+	blocks = $('.block')
+	changing = false
+	flipped = false
+	darkerFactor = -0.07
 
+	### FUNCTIONS ###
 	getPage = ->
 		pages.indexOf(window.location.pathname)
+
+	recolor = (hex, lum) ->
+		hex = String(hex).replace(/[^0-9a-f]/gi, '')
+		if hex.length < 6
+			hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
+		lum = lum || 0
+		rgb = "#"
+		for i in [0...3]
+			c = parseInt(hex.substr(i*2,2), 16)
+			c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16)
+			rgb += ("00"+c).substr(c.length)
+		rgb
 
 	overButton = (pos) ->
 		->
@@ -37,6 +53,25 @@ jQuery ->
 						.off('mouseout')
 			$('#m-overlay').trigger 'click'
 
+	randomize = (a) ->
+		for i in [0...a.length]
+			tempPos = Math.floor(Math.random() * a.length)
+			swapPos = Math.floor(Math.random() * a.length)
+			temp = a[tempPos]
+			a[tempPos] = a[swapPos]
+			a[swapPos] = temp
+
+	colorBlocks = (pos, first = false) ->
+		->
+			if !first
+				$('.block').addClass("transition")
+			newColors = []
+			for i in [0...blocks.length]
+				newColors.push recolor(navColors[pos], -0.1 + i * 0.05)
+			randomize(newColors)
+			for i in [0...blocks.length]
+				$(blocks[i]).css backgroundColor: newColors[i]
+
 	placeHex = ->
 		imgH = $(window).height() / 2.61
 		imgW = $(window).width()
@@ -57,48 +92,49 @@ jQuery ->
 				left: 0
 		$('#hex-container').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-container').height() / 2 ) + "px" }
 
-	$('#top img').load ->
-		placeHex()
-
-	$(window).resize ->
-		placeHex()
-
-	recolor = (hex, lum) ->
-		hex = String(hex).replace(/[^0-9a-f]/gi, '')
-		if hex.length < 6
-			hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2]
-		lum = lum || 0
-		rgb = "#"
-		for i in [0...3]
-			c = parseInt(hex.substr(i*2,2), 16)
-			c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16)
-			rgb += ("00"+c).substr(c.length)
-		rgb
-
 	colorHex = (side, color, section = "") ->
 		$("#{section} #hex-#{side} .hex-top").css { borderBottomColor: color }
 		$("#{section} #hex-#{side} .hex-middle").css { backgroundColor: color }
 		$("#{section} #hex-#{side} .hex-bottom").css { borderTopColor: color  }
 
 
-	colorMiddle = ->
-		colorHex("bg", recolor(navColors[getPage()], darkerFactor), "#main")
-		$('#main #hex-line').css { backgroundColor: recolor(navColors[getPage()], darkerFactor) }
-	
-	darkerFactor = -0.07
-	colorHex("front", navColors[getPage()])
-	colorMiddle()
+	colorMiddle = (pos) ->
+		colorHex("bg", recolor(navColors[pos], darkerFactor), "#main")
+		$('#main #hex-line').css { backgroundColor: recolor(navColors[pos], darkerFactor) }
 
 	flipHex = (pos) ->
 		if $("#hex").hasClass("flipped")
-			colorHex("front", navColors[getPage()])
+			colorHex("front", navColors[pos])
 			$("#hex").removeClass("flipped")
 		else
-			colorHex("back", navColors[getPage()])
+			colorHex("back", navColors[pos])
 			$("#hex").addClass("flipped")
 
-	changing = false
-	flipped = false
+	openNav = ->
+		if !changing
+			$('#mobile p').fadeOut 300, ->
+				$(this).text('X')
+				$(this).fadeIn 300
+			$('#mobile').off 'click'
+			$('#mobile').click ->
+				closeNav()
+			$('#mobile').animate { right: "9em" }, { duration: 700, easing: "easeInOutBack" }
+			$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
+			$('#m-overlay').css display: "block"
+			$('#m-overlay').click ->
+				closeNav()
+
+	closeNav = ->
+		$('#mobile p').fadeOut 300, ->
+			$(this).text('i')
+			$(this).fadeIn 300
+		$('#mobile').animate { right: 0 }, { duration: 700, easing: "easeInOutBack" }
+		$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
+		$('#m-overlay').css display: "none"
+		$('#m-overlay').off 'click'
+		$('#mobile').off 'click'
+		$('#mobile').click ->
+			openNav()
 
 	initLinks = ->
 		for i in [0...links.length]
@@ -121,6 +157,12 @@ jQuery ->
 						$.pjax { url: target, container: '#main' }
 
 	initNav = ->
+		$('#mobile').on 'mouseover', ->
+			$('#mobile p').addClass('spin')
+		$('#mobile').on 'mouseout', ->
+			$('#mobile p').removeClass('spin')
+		$('#mobile').click ->
+			openNav()
 		for i in [0...links.length]
 			$(hover[i]).css "background-color": navColors[i]
 			$(links[i]).mouseover(overButton(i))
@@ -128,10 +170,8 @@ jQuery ->
 			$(links[i]).click(changeBg(i))
 		initLinks()
 
-	initNav()
-
 	loadIn = ->
-		colorMiddle()
+		colorMiddle(getPage())
 		$("#main").wrap('<div id="circle" />')
 		$("#circle").css
 			top: $("#hex-container").offset()["top"] + $("#hex-container").height() / 2 - $("#circle").outerHeight() / 2 + "px"
@@ -166,50 +206,32 @@ jQuery ->
 		$("#top img").load ->
 			placeHex()
 		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
+
+	### INITIALIZE ###
+	$('#top img').load ->
+		placeHex()
+
+	$(window).resize ->
+		placeHex()
+
+	initNav()
 	
-	do changeBg getPage()
+	initialPage = getPage()
+	do changeBg initialPage
+	do colorBlocks initialPage, true
+	colorHex("front", navColors[initialPage])
+	colorMiddle(initialPage)
 
 	$(document).on 'pjax:end', ->
-		do changeBg getPage()
-		flipHex()
+		pos = getPage()
+		do changeBg pos
+		flipHex(pos)
 		if changing
+			setTimeout(colorBlocks(pos), 800)
 			loadIn()
 		else
 			$("#wrapper").load window.location.pathname + " #main", ->
-				colorMiddle()
+				do colorBlocks(pos)
+				colorMiddle(pos)
 				$("#top img").load ->
 					placeHex()
-
-	openNav = ->
-		if !changing
-			$('#mobile p').fadeOut 300, ->
-				$(this).text('X')
-				$(this).fadeIn 300
-			$('#mobile').off 'click'
-			$('#mobile').click ->
-				closeNav()
-			$('#mobile').animate { right: "9em" }, { duration: 700, easing: "easeInOutBack" }
-			$('nav').animate { right: "-2em" }, { duration: 700, easing: "easeInOutBack" }
-			$('#m-overlay').css display: "block"
-			$('#m-overlay').click ->
-				closeNav()
-
-	closeNav = ->
-		$('#mobile p').fadeOut 300, ->
-			$(this).text('i')
-			$(this).fadeIn 300
-		$('#mobile').animate { right: 0 }, { duration: 700, easing: "easeInOutBack" }
-		$('nav').animate { right: "-11.5em" }, { duration: 700, easing: "easeInOutBack" }
-		$('#m-overlay').css display: "none"
-		$('#m-overlay').off 'click'
-		$('#mobile').off 'click'
-		$('#mobile').click ->
-			openNav()
-
-	#mobile
-	$('#mobile').on 'mouseover', ->
-		$('#mobile p').addClass('spin')
-	$('#mobile').on 'mouseout', ->
-		$('#mobile p').removeClass('spin')
-	$('#mobile').click ->
-		openNav()
