@@ -4,8 +4,9 @@ jQuery ->
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
 	navColors = ["#30d284", "#e86146", "#3fa9e2", "#e8566e", "#a661c2"]
 	defaultColor = "#ffffff"
-	yaleBlue = "#0f4d92"
+	bgColor = "#2b303e"
 	links = $('nav li a')
+	allPjax = $('a[data-pjax="true"]')
 	hover = $('.hoverBar')
 	blocks = $('.block')
 	changing = false
@@ -61,6 +62,9 @@ jQuery ->
 			a[tempPos] = a[swapPos]
 			a[swapPos] = temp
 
+	colorBlock = (i, color) ->
+		->
+			$(blocks[i]).css backgroundColor: color
 	colorBlocks = (pos, first = false) ->
 		->
 			if !first
@@ -70,7 +74,12 @@ jQuery ->
 				newColors.push recolor(navColors[pos], -0.1 + i * 0.05)
 			randomize(newColors)
 			for i in [0...blocks.length]
-				$(blocks[i]).css backgroundColor: newColors[i]
+				delay = 0
+				if !first
+					switch i
+						when 0 then delay = 200
+						when 1, 3 then delay = 100
+				setTimeout(colorBlock(i, newColors[i]), delay)
 
 	placeHex = ->
 		imgH = $(window).height() / 2.61
@@ -137,8 +146,8 @@ jQuery ->
 			openNav()
 
 	initLinks = ->
-		for i in [0...links.length]
-			$(links[i]).click (e) ->
+		for i in [0...allPjax.length]
+			$(allPjax[i]).click (e) ->
 				e.preventDefault()
 				target = $(this).attr 'href'
 				if target isnt window.location.pathname

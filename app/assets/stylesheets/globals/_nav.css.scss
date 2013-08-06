@@ -2,11 +2,12 @@
 	height: 1 * $block;
 	position: fixed;
 	z-index: 666999;
-	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.7);
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7);
 	.transition {
 		@include transition( all .2s linear );
 	}
 	font-family: 'BebasNeueRegular';
+	cursor: pointer;
 }
 
 .row:nth-of-type(1) {
@@ -14,12 +15,40 @@
 	width: 3 * $block;
 	.block:nth-of-type(1) {
 		left: 0;
+		.text {
+			position: relative;
+			top: 0.25em;
+			left: 0.15em;
+			p {
+				font-size: 1.4em;
+				letter-spacing: 0.2em;
+			}
+		}
 	}
 	.block:nth-of-type(2) {
 		left: $block;
+		.text {
+			position: relative;
+			top: 0.9em;
+			p {
+				font-size: 1.3em;
+				text-decoration: overline underline;
+			}
+		}
 	}
 	.block:nth-of-type(3) {
 		left: 2 * $block;
+		.text {
+			position: relative;
+			top: 0.3em;
+			p:nth-of-type(1) {
+				font-size: 1.7em;
+				line-height: 0.9em;
+			}
+			p:nth-of-type(2) {
+				font-size: 0.9em;
+			}
+		}
 	}
 }
 
@@ -28,9 +57,28 @@
 	width: 2 * $block;
 	.block:nth-of-type(1) {
 		left: 0;
+		.text {
+			position: relative;
+			top: 0.5em;
+			p {
+				font-size: 1.3em;
+				letter-spacing: 0.05em;
+				line-height: 0.9em;
+			}
+		}
 	}
 	.block:nth-of-type(2) {
 		left: $block;
+		.text {
+			position: relative;
+			top: 0.2em;
+			p {
+				font-size: 1.2em;
+			}
+			p:nth-of-type(2) {
+				line-height: 0.3em;
+			}
+		}
 	}
 }
 
@@ -39,6 +87,13 @@
 	width: 1 * $block;
 	.block:nth-of-type(1) {
 		left: 0;
+		.text {
+			position: relative;
+			top: 0.3em;
+			p {
+				font-size: 2.7em;
+			}
+		}
 	}
 }
 
