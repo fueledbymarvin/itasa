@@ -8,6 +8,8 @@ jQuery ->
 	links = $('nav li a')
 	allPjax = $('a[data-pjax="true"]')
 	hover = $('.hoverBar')
+	blockFronts = $('.block-front')
+	blockBacks = $('.block-back')
 	blocks = $('.block')
 	changing = false
 	flipped = false
@@ -64,16 +66,18 @@ jQuery ->
 
 	colorBlock = (i, color) ->
 		->
-			$(blocks[i]).css backgroundColor: color
+			$(blockFronts[i]).css backgroundColor: color
+			$(blockBacks[i]).css backgroundColor: color
 	colorBlocks = (pos, first = false) ->
 		->
 			if !first
-				$('.block').addClass("transition")
+				$('.block-front').addClass("transition")
+				$('.block-back').addClass("transition")
 			newColors = []
-			for i in [0...blocks.length]
+			for i in [0...blockFronts.length]
 				newColors.push recolor(navColors[pos], -0.1 + i * 0.05)
 			randomize(newColors)
-			for i in [0...blocks.length]
+			for i in [0...blockFronts.length]
 				delay = 0
 				if !first
 					switch i
@@ -190,7 +194,7 @@ jQuery ->
 			left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
 		finalRadius = Math.ceil(Math.sqrt(Math.pow($(window).width(), 2) + Math.pow($(window).height(), 2)))
 		options =
-			duration: 800
+			duration: 600
 			easing: 'easeInOutQuad'
 			step: ->
 				$("#circle").css
@@ -236,7 +240,7 @@ jQuery ->
 		do changeBg pos
 		flipHex(pos)
 		if changing
-			setTimeout(colorBlocks(pos), 800)
+			setTimeout(colorBlocks(pos), 600)
 			loadIn()
 		else
 			$("#wrapper").load window.location.pathname + " #main", ->
@@ -244,3 +248,16 @@ jQuery ->
 				colorMiddle(pos)
 				$("#top img").load ->
 					placeHex()
+
+	flipBlock = (i) ->
+		->
+			$(blocks[i]).addClass 'flipped'
+	flipBlockBack = (i) ->
+		->
+			$(blocks[i]).removeClass 'flipped'
+	$('#title').mouseover ->
+		for i in [0...blocks.length]
+			setTimeout flipBlock(i), 30 * i
+	$('#title').mouseout ->
+		for i in [0...blocks.length]
+			setTimeout flipBlockBack(i), 30 * i

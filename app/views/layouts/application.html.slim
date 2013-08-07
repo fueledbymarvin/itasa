@@ -11,8 +11,7 @@ html lang="en"
 
 	body
 		header
-			a href="/register" data-pjax="true"
-
+			a id="title" href="/register" data-pjax="true"
 				.row
 					.block-container
 						.block
@@ -39,7 +38,7 @@ html lang="en"
 									p CC
 							.block-back
 								.text
-									p AND
+									p &amp;
 				.row
 					.block-container
 						.block
@@ -50,6 +49,7 @@ html lang="en"
 							.block-back
 								.text
 									p REGI
+									p STER
 					.block-container
 						.block
 							.block-front
@@ -59,16 +59,14 @@ html lang="en"
 									p 16
 							.block-back
 								.text
-									p STER
+									p NOW!
 				.row
 					.block-container
 						.block
 							.block-front
-								.text
-									p Y
+								= image_tag 'yale.png'
 							.block-back
-								.text
-									p NOW
+								= image_tag 'bulldog.png'
 			#m-overlay
 			#mobile
 				p i
