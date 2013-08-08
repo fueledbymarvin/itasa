@@ -231,7 +231,6 @@ jQuery ->
 
 	footerUp = (i) ->
 		->
-			console.log("up")
 			$(footerBlocks[i]).stop(true).animate { top: "-3.2em" }, { duration: 400, easing: 'easeInOutBack' }
 			switch i
 				when 0 then $("footer p").text 'Like Us'
@@ -241,7 +240,6 @@ jQuery ->
 
 	footerDown = (i) ->
 		->
-			console.log("down")
 			$(footerBlocks[i]).stop(true).animate { top: 0 }, { duration: 400, easing: 'easeInOutBack' }
 			$("footer p").text 'fueled by marvin'
 			$("footer p").css color: "#8892ad"
