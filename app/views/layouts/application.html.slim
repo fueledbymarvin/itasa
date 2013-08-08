@@ -104,3 +104,20 @@ html lang="en"
 			#main.container
 				== yield
 		footer
+			#social
+				a href="http://facebook.com/itasanational" target="_blank"
+					.footer-block-wrapper
+						.footer-block
+							= image_tag "fbDark.png"
+							= image_tag "fbLight.png"
+				a href="http://github.com/fueledbymarvin" target="_blank"
+					.footer-block-wrapper
+						.footer-block
+							= image_tag "mDark.png"
+							= image_tag "mLight.png"
+				a href="mailto:monica.chen@yale.edu"
+					.footer-block-wrapper
+						.footer-block
+							= image_tag "mailDark.png"
+							= image_tag "mailLight.png"
+			p fueled by marvin

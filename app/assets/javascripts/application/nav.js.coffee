@@ -11,6 +11,8 @@ jQuery ->
 	blockFronts = $('.block-front')
 	blockBacks = $('.block-back')
 	blocks = $('.block')
+	footerWrappers = $('.footer-block-wrapper')
+	footerBlocks = $('.footer-block')
 	changing = false
 	flipped = false
 	darkerFactor = -0.07
@@ -220,6 +222,30 @@ jQuery ->
 			placeHex()
 		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
 
+	flipBlock = (i) ->
+		->
+			$(blocks[i]).addClass 'flipped'
+	flipBlockBack = (i) ->
+		->
+			$(blocks[i]).removeClass 'flipped'
+
+	footerUp = (i) ->
+		->
+			console.log("up")
+			$(footerBlocks[i]).stop(true).animate { top: "-3.2em" }, { duration: 400, easing: 'easeInOutBack' }
+			switch i
+				when 0 then $("footer p").text 'Like Us'
+				when 1 then $("footer p").text 'Website by Marvin Qian'
+				when 2 then $("footer p").text 'Send Us A Message'
+			$("footer p").css color: "white"
+
+	footerDown = (i) ->
+		->
+			console.log("down")
+			$(footerBlocks[i]).stop(true).animate { top: 0 }, { duration: 400, easing: 'easeInOutBack' }
+			$("footer p").text 'fueled by marvin'
+			$("footer p").css color: "#8892ad"
+
 	### INITIALIZE ###
 	$('#top img').load ->
 		placeHex()
@@ -249,15 +275,12 @@ jQuery ->
 				$("#top img").load ->
 					placeHex()
 
-	flipBlock = (i) ->
-		->
-			$(blocks[i]).addClass 'flipped'
-	flipBlockBack = (i) ->
-		->
-			$(blocks[i]).removeClass 'flipped'
 	$('#title').mouseover ->
 		for i in [0...blocks.length]
 			setTimeout flipBlock(i), 30 * i
 	$('#title').mouseout ->
 		for i in [0...blocks.length]
 			setTimeout flipBlockBack(i), 30 * i
+
+	for i in [0...footerWrappers.length]
+		$(footerWrappers[i]).mouseover(footerUp(i)).mouseout(footerDown(i))
