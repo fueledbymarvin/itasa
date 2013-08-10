@@ -1,5 +1,3 @@
-
-
 animateQA = (i) ->
 	->
 		$('.qa:eq(' + i + ')').addClass("next")
