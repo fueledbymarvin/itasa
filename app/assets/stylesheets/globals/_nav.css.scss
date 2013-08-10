@@ -5,7 +5,6 @@
 	.transition {
 		@include transition( all .2s linear );
 	}
-	font-family: 'BebasNeueRegular';
 }
 
 .row:nth-of-type(1) {
@@ -240,7 +239,6 @@ nav {
 		height: 2.5em;
 		font-size: 1.5em;
 		color: $fgColor;
-		font-family: 'BebasNeueRegular';
 		.hoverBar {
 			display: block;
 			height: 0px;
@@ -307,5 +305,21 @@ nav {
 	}
 	#hex-back {
 		@include transform( rotateY(180deg) );
+	}
+}
+
+#inprogressImg {
+	&.initial {
+		@include transform( rotateZ(-10deg) );
+		opacity: 0;
+		margin-left: 2%;
+	}
+	@include transform-style( preserve-3d );
+	@include transform-origin( bottom left );
+	@include transition( all 0.3s ease-out );
+	&.final {
+		margin-left: 0;
+		opacity: 1;
+		@include transform( rotateZ(0deg) );
 	}
 }
