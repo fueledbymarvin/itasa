@@ -111,7 +111,7 @@ jQuery ->
 			placeholderHeight = minHeight - ( $('#content').outerHeight() - $('#placeholder').height() )
 			$('#placeholder').css { height: placeholderHeight }
 		else
-			$('#placeholder').remove()
+			$('#placeholder').css { height: 0 }
 
 	colorHex = (side, color, section = "") ->
 		$("#{section} #hex-#{side} .hex-top").css { borderBottomColor: color }
