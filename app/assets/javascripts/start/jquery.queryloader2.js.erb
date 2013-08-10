@@ -93,17 +93,17 @@
                 var subtitleHeight = $("#subtitleImg").height();
                 qLsubtitle.css({display: "block", marginTop: subtitleHeight / 3 + "px", opacity: 0});
                 qLimg.css({display: "block", width: "0%", opacity: 0});
-                qLinprogress.css({display: "block", marginTop: "-" + inprogressHeight * 1.1 + "px", opacity: 0});
-                qLwork.animate({marginTop: workHeight / 3 + "px"}, 300);
-                qLimg.delay(100).animate({opacity: 1, marginTop: "-" + workHeight + "px", width: "80%", left: "10%"}, {duration: 200, complete: function() {
-                    qLinprogress.delay(200).animate({left: "79%", opacity: 1}, 300);
-                    qLimg.delay(200).animate({left: "3%"}, { duration: 300, complete: function() {
-                        qLsubtitle.delay(100).animate({marginTop: subtitleHeight / 2 + "px", opacity: 1}, {duration: 500, complete: function() {
+                qLinprogress.css({display: "block", marginTop: "-" + 0.648 * inprogressHeight + "px"});
+                qLwork.animate({marginTop: workHeight / 3 + "px"}, 200);
+                qLimg.animate({opacity: 1, marginTop: "-" + workHeight + "px", width: "80%", left: "10%"}, {duration: 400, easing: 'easeOutBack', complete: function() {
+                    qLimg.delay(200).animate({left: "2%", width: "46.7%", marginTop: "-" + workHeight / 0.8 * 0.467 + "px"}, { duration: 400, easing: 'easeOutQuad', complete: function() {
+                        qLinprogress.addClass("final");
+                        qLsubtitle.delay(400).animate({marginTop: subtitleHeight * 0.739 + "px", opacity: 1}, {duration: 300, complete: function() {
                             qLwork.delay(1000).animate({width: 0, height: 0, left: "50%", top: "50%"}, {duration: 300, step: function() {
                                 qLimg.css({marginTop: "-" + $("#workImg").height() + "px"});
-                                qLinprogress.css({marginTop: "-" + $("#inprogressImg").height() * 1.1 + "px"});
-                                qLsubtitle.css({marginTop: subtitleHeight / 2 + "px"});
-                                qLwork.css({marginTop: $("#workImg").height() / 3 + "px"});
+                                qLinprogress.css({marginTop: "-" + $("#inprogressImg").height() * 0.648 + "px"});
+                                qLsubtitle.css({marginTop: $("#subtitleImg").height() * 0.739 + "px"});
+                                qLwork.css({marginTop: $("#workImg").height() / 0.467 * 0.8 / 3 + "px"});
                             }, complete: function() {
                                 $(qLoverlay).remove();
                                 qLoptions.onComplete();
@@ -113,9 +113,9 @@
                 }});
                 $(window).resize(function() {
                     qLimg.css({marginTop: "-" + $("#workImg").height() + "px"});
-                    qLinprogress.css({marginTop: "-" + $("#inprogressImg").height() * 1.1 + "px"});
-                    qLsubtitle.css({marginTop: subtitleHeight / 2 + "px"});
-                    qLwork.css({marginTop: $("#workImg").height() / 3 + "px"});
+                    qLinprogress.css({marginTop: "-" + $("#inprogressImg").height() * 0.648 + "px"});
+                    qLsubtitle.css({marginTop: $("#subtitleImg").height() * 0.739 + "px"});
+                    qLwork.css({marginTop: $("#workImg").height() / 0.467 * 0.8 / 3 + "px"});
                 });
             } else {
                 $('#'+qLoptions.overlayId).fadeOut(500, function () {
@@ -218,12 +218,13 @@
             left: "50%",
             top: "50%"
         }).appendTo(qLwork);
-        qLinprogress = $("<img src='<%= asset_path 'inprogress.png' %>' id='inprogressImg'/>").css({
+        qLinprogress = $("<img src='<%= asset_path 'inprogress.png' %>' id='inprogressImg' class='initial'/>").css({
             display: "none",
-            width: "20%",
+            width: "52.5%",
             position: "absolute",
-            left: "76%",
-            top: "50%"
+            left: "46.4%",
+            top: "50%",
+            zIndex: "2"
         }).appendTo(qLwork);
         qLsubtitle = $("<img src='<%= asset_path 'subtitle.png' %>' id='subtitleImg'/>").css({
             display: "none",
@@ -233,8 +234,8 @@
             top: "50%"
         }).appendTo(qLwork);
         qLbar = $("<div id='qLbar'></div>").css({
-            height: "1%",
-            marginTop: "-0.5%",
+            height: "0.8%",
+            marginTop: "-0.4%",
             backgroundColor: qLoptions.barColor,
             width: "0%",
             position: "absolute",

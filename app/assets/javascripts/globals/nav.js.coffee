@@ -106,6 +106,12 @@ jQuery ->
 				top: -1 * ($("#main #top img").height() - imgH) / 2 + "px";
 				left: 0
 		$('#hex-container').css { top: ( $("#top").height() + $("#hex-line").height() / 2 - $('#hex-container').height() / 2 ) + "px" }
+		minHeight =  $(window).height() - ( $("#top").height() + $("#hex-line").height() ) 
+		if $('#content').outerHeight() - $('#placeholder').height() < minHeight
+			placeholderHeight = minHeight - ( $('#content').outerHeight() - $('#placeholder').height() )
+			$('#placeholder').css { height: placeholderHeight }
+		else
+			$('#placeholder').remove()
 
 	colorHex = (side, color, section = "") ->
 		$("#{section} #hex-#{side} .hex-top").css { borderBottomColor: color }
@@ -151,6 +157,33 @@ jQuery ->
 		$('#mobile').click ->
 			openNav()
 
+	keys = [32..40]
+
+	preventDefault = (e) ->
+		e = e or window.event
+		if (e.preventDefault)
+	    	e.preventDefault()
+	  e.returnValue = false
+
+	keydown = (e) ->
+	    for i in keys
+	        if e.keyCode is keys[i]
+	            preventDefault(e)
+
+	wheel = (e) ->
+	  	preventDefault(e)
+
+	disable_scroll = ->
+		if window.addEventListener
+			window.addEventListener('DOMMouseScroll', wheel, false)
+		window.onmousewheel = document.onmousewheel = wheel
+		document.onkeydown = keydown
+
+	enable_scroll = ->
+	    if window.removeEventListener
+	    	window.removeEventListener('DOMMouseScroll', wheel, false)
+	    window.onmousewheel = document.onmousewheel = document.onkeydown = null
+
 	initLinks = ->
 		for i in [0...allPjax.length]
 			$(allPjax[i]).click (e) ->
@@ -159,9 +192,9 @@ jQuery ->
 				if target isnt window.location.pathname
 					if not changing
 						changing = true
-					$('#desaturate').css { opacity: 1 }
 					$('body').animate { scrollTop: 0 }, 300, 'easeInOutQuad', ->
-						$("body").css { overflow: "hidden" }
+						disable_scroll()
+						$('#desaturate').css { opacity: 1 }
 						placeHex()
 						$('#main.container').attr("id", "prev")
 						main = $('<div id="main" class="container"></div>')
@@ -207,8 +240,7 @@ jQuery ->
 					left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
 			complete: ->
 				$('#desaturate').css { opacity: 0 }
-				$("body").css
-					overflow: "visible"
+				enable_scroll()
 				$("#prev").remove()
 				$("#main").unwrap()
 				$("#main").css
@@ -218,6 +250,7 @@ jQuery ->
 					position: "static"
 				placeHex()
 				changing = false
+				initPage(getPage())
 		$("#top img").load ->
 			placeHex()
 		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
@@ -232,10 +265,7 @@ jQuery ->
 	footerUp = (i) ->
 		->
 			$(footerBlocks[i]).stop(true).animate { top: "-3.2em" }, { duration: 400, easing: 'easeInOutBack' }
-			switch i
-				when 0 then $("footer p").text 'Like Us'
-				when 1 then $("footer p").text 'Website by Marvin Qian'
-				when 2 then $("footer p").text 'Send Us A Message'
+			$("footer p").text $(footerBlocks[i]).data("subtitle")
 			$("footer p").css color: "white"
 
 	footerDown = (i) ->
@@ -243,6 +273,14 @@ jQuery ->
 			$(footerBlocks[i]).stop(true).animate { top: 0 }, { duration: 400, easing: 'easeInOutBack' }
 			$("footer p").text 'fueled by marvin'
 			$("footer p").css color: "#8892ad"
+
+	initPage = (pos) ->
+		switch pos
+			when 0 then window.initHome()
+			when 1 then window.initAbout()
+			when 2 then window.initRegister()
+			when 3 then window.initSchedule()
+			when 4 then window.initContact()
 
 	### INITIALIZE ###
 	$('#top img').load ->
@@ -254,6 +292,7 @@ jQuery ->
 	initNav()
 	
 	initialPage = getPage()
+	initPage(initialPage)
 	do changeBg initialPage
 	do colorBlocks initialPage, true
 	colorHex("front", navColors[initialPage])
@@ -272,6 +311,7 @@ jQuery ->
 				colorMiddle(pos)
 				$("#top img").load ->
 					placeHex()
+					initPage(pos)
 
 	$('#title').mouseover ->
 		for i in [0...blocks.length]
