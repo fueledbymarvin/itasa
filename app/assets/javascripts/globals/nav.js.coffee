@@ -253,7 +253,7 @@ jQuery ->
 				initPage(getPage())
 		$("#top img").load ->
 			placeHex()
-		$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
+			$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
 
 	flipBlock = (i) ->
 		->
@@ -282,6 +282,12 @@ jQuery ->
 			when 3 then window.initSchedule()
 			when 4 then window.initContact()
 
+	httpInit = (pos) ->
+		->
+			if window.finished
+				clearInterval(checkFinished)
+				initPage(pos)
+
 	### INITIALIZE ###
 	$('#top img').load ->
 		placeHex()
@@ -292,7 +298,7 @@ jQuery ->
 	initNav()
 	
 	initialPage = getPage()
-	initPage(initialPage)
+	checkFinished = setInterval(httpInit(initialPage), 100)
 	do changeBg initialPage
 	do colorBlocks initialPage, true
 	colorHex("front", navColors[initialPage])
