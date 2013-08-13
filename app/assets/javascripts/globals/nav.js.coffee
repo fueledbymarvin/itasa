@@ -49,13 +49,11 @@ jQuery ->
 				if i isnt pos
 					$(hover[i]).css height: "0px"
 					$(links[i]).css(color: defaultColor)
-						.on('mouseover', overButton(i))
-						.on('mouseout', outButton(i))
+						.hover(overButton(i), outButton(i))
 				else
 					$(hover[i]).css height: "5px"
 					$(links[i]).css(color: navColors[pos])
-						.off('mouseover')
-						.off('mouseout')
+						.off('mouseenter mouseleave')
 			$('#m-overlay').trigger 'click'
 
 	randomize = (a) ->
@@ -205,17 +203,16 @@ jQuery ->
 						$.pjax { url: target, container: '#main' }
 
 	initNav = ->
-		$('#mobile').on 'mouseover', ->
-			$('#mobile p').addClass('spin')
-		$('#mobile').on 'mouseout', ->
-			$('#mobile p').removeClass('spin')
-		$('#mobile').click ->
+		$('#mobile').hover(
+			->
+				$('#mobile p').addClass('spin')
+			->
+				$('#mobile p').removeClass('spin')
+		).click ->
 			openNav()
 		for i in [0...links.length]
 			$(hover[i]).css "background-color": navColors[i]
-			$(links[i]).mouseover(overButton(i))
-			$(links[i]).mouseout(outButton(i))
-			$(links[i]).click(changeBg(i))
+			$(links[i]).hover(overButton(i), outButton(i)).click(changeBg(i))
 		initLinks()
 
 	loadIn = ->
@@ -319,12 +316,14 @@ jQuery ->
 					placeHex()
 					initPage(pos)
 
-	$('#title').mouseover ->
-		for i in [0...blocks.length]
-			setTimeout flipBlock(i), 30 * i
-	$('#title').mouseout ->
-		for i in [0...blocks.length]
-			setTimeout flipBlockBack(i), 30 * i
+	$('#title').hover(
+		->
+			for i in [0...blocks.length]
+				setTimeout flipBlock(i), 30 * i
+		->
+			for i in [0...blocks.length]
+				setTimeout flipBlockBack(i), 30 * i
+	)
 
 	for i in [0...footerWrappers.length]
-		$(footerWrappers[i]).mouseover(footerUp(i)).mouseout(footerDown(i))
+		$(footerWrappers[i]).hover(footerUp(i), footerDown(i))

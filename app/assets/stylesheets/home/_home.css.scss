@@ -6,10 +6,10 @@ h1 {
 @for $i from 1 through 6 {
 	.qa:nth-of-type(#{$i}) {
 		span {
-			@include transition(width #{0.4 + (6 - $i) * 0.2}s $ease-in-back);
+			@include transition(width #{(7 - $i) * 0.15}s ease-in-out);
 		}
 		.question:before {
-			@include transition(left #{0.4 + (6 - $i) * 0.2}s $ease-in-back);
+			@include transition(left #{(7 - $i) * 0.15}s ease-in-out);
 		}
 		&.next {
 			.question {
@@ -32,19 +32,12 @@ h1 {
 	}
 	span {
 		font-size: 2em;
-		@media only screen and (max-width: 640px) {
-	        font-size: 1.5em;
-	    }
 		display: inline-block;
 	}
 	p {
 		padding: 1em;
 	}
 	.question {
-		p {
-			opacity: 0;
-			@include transition(opacity 0.2s linear);
-		}
 		width: 0%;
 		background-color: $mgColor;
 		&:before {
@@ -61,9 +54,16 @@ h1 {
 		width: 70%;
 		text-align: right;
 	}
-	&.next {
-		.question p {
-			opacity: 1;
-		}
-	}
+}
+
+.wrap-top, .wrap-bottom {
+	position: absolute;
+	left: 0;
+	margin: -6.6em 0 0 -0.6em;
+	border: 0.2em solid transparent;
+}
+
+.wrap-bottom {
+	left: 100%;
+	margin: 0.2em;
 }
