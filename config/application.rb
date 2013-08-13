@@ -77,6 +77,7 @@ module Itasa
         g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 
+    config.middleware.use Rack::Deflater
     config.middleware.use Rack::Pjax
   end
 end
