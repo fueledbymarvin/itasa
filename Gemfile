@@ -51,7 +51,7 @@ end
 
 gem 'jquery-rails'
 
-gem 'heroku-deflater', :group => :production
+gem 'heroku_rails_deflate', :group => :production
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

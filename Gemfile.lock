@@ -106,8 +106,10 @@ GEM
       spork (>= 0.8.4)
     hashie (2.0.5)
     headless (1.0.1)
-    heroku-deflater (0.5.1)
-      rack (>= 1.4.5)
+    heroku_rails_deflate (1.0.1)
+      actionpack (~> 3.2.13)
+      activesupport (~> 3.2.13)
+      rack (~> 1.4.5)
     hike (1.2.3)
     http_parser.rb (0.5.3)
     http_parser.rb (0.5.3-x86-mingw32)
@@ -286,7 +288,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   headless
-  heroku-deflater
+  heroku_rails_deflate
   jquery-rails
   omniauth-facebook (= 1.4.0)
   paperclip
