@@ -2,7 +2,7 @@ jQuery ->
 
 	### VARIABLES ###
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
-	navColors = ["#30d284", "#e86146", "#3fa9e2", "#e8566e", "#a661c2"]
+	navColors = ["#30d284", "#f5cb42", "#3fa9e2", "#e8566e", "#a661c2"]
 	defaultColor = "#ffffff"
 	bgColor = "#2b303e"
 	links = $('nav li a')
@@ -215,8 +215,7 @@ jQuery ->
 			$(links[i]).hover(overButton(i), outButton(i)).click(changeBg(i))
 		initLinks()
 
-	loadIn = ->
-		colorMiddle(getPage())
+	loadIn = (pos) ->
 		$("#main").wrap('<div id="circle" />')
 		$("#circle").css
 			top: $("#hex-container").offset()["top"] + $("#hex-container").height() / 2 - $("#circle").outerHeight() / 2 + "px"
@@ -249,7 +248,11 @@ jQuery ->
 				changing = false
 				initPage(getPage())
 		$("#top img").load ->
+			do changeBg pos
+			colorMiddle(pos)
+			flipHex(pos)
 			placeHex()
+			setTimeout(colorBlocks(pos), 600)
 			$("#circle").delay(500).animate { width: finalRadius + "px", height: finalRadius + "px" }, options
 
 	flipBlock = (i) ->
@@ -303,13 +306,12 @@ jQuery ->
 
 	$(document).on 'pjax:end', ->
 		pos = getPage()
-		do changeBg pos
-		flipHex(pos)
 		if changing
-			setTimeout(colorBlocks(pos), 600)
-			loadIn()
+			loadIn(pos)
 		else
 			$("#wrapper").load window.location.pathname + " #main", ->
+				do changeBg pos
+				flipHex(pos)
 				do colorBlocks(pos)
 				colorMiddle(pos)
 				$("#top img").load ->
