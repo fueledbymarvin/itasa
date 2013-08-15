@@ -2,7 +2,7 @@ jQuery ->
 
 	### VARIABLES ###
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
-	navColors = ["#30d284", "#f5cb42", "#3fa9e2", "#e8566e", "#a661c2"]
+	navColors = ["#A8EA80", "#FE5067", "#AE94B3", "#85C1C9", "#FFDB85"]
 	defaultColor = "#ffffff"
 	bgColor = "#2b303e"
 	links = $('nav li a')
