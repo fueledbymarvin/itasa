@@ -50,7 +50,8 @@ h1 {
 		}
 	}
 	.answer {
-		background-color: darken(#A8EA80, 7%);
+		color: $mgColor;
+		background-color: #A8EA80;
 		width: 70%;
 		text-align: right;
 	}
