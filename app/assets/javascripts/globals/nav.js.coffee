@@ -71,8 +71,10 @@ jQuery ->
 	colorBlocks = (pos, first = false) ->
 		->
 			if !first
-				$('.block-front').addClass("transition")
-				$('.block-back').addClass("transition")
+				$('.block-front').addClass("block-transition")
+				$('.block-back').addClass("block-transition")
+				$('#mobile').addClass("block-transition")
+			$('#mobile').css backgroundColor: navColors[pos]
 			newColors = []
 			for i in [0...blockFronts.length]
 				newColors.push recolor(navColors[pos], -0.1 + i * 0.05)
