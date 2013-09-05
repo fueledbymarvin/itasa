@@ -16,11 +16,10 @@
 		left: 0;
 		.block-front .text {
 			position: relative;
-			top: 0.25em;
-			left: 0.15em;
+			top: 0.9em;
 			p {
-				font-size: 1.4em;
-				letter-spacing: 0.2em;
+				font-size: 1.3em;
+				text-decoration: overline underline;
 			}
 		}
 		.block-back .text {
@@ -36,10 +35,11 @@
 		top: -1 * $block;
 		.block-front .text {
 			position: relative;
-			top: 0.9em;
+			top: 0.25em;
+			left: 0.15em;
 			p {
-				font-size: 1.3em;
-				text-decoration: overline underline;
+				font-size: 1.4em;
+				letter-spacing: 0.2em;
 			}
 		}
 		.block-back .text {
