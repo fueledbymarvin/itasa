@@ -208,10 +208,11 @@ jQuery ->
 		$('#mobile').hover(
 			->
 				$('#mobile p').addClass('spin')
+				if $('#mobile p').text() is 'i'
+					openNav()
 			->
 				$('#mobile p').removeClass('spin')
-		).click ->
-			openNav()
+		)
 		for i in [0...links.length]
 			$(hover[i]).css "background-color": navColors[i]
 			$(links[i]).hover(overButton(i), outButton(i)).click(changeBg(i))
