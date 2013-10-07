@@ -1,10 +1,15 @@
 class SessionsController < ApplicationController
 	def create
-		user = User.from_omniauth(env["omniauth.auth"])
-		session[:user_id] = user.id
-		source = session[:source] || :root
-		session[:source] = nil
-		redirect_to source, :notice => "Signed in!"
+		auth = env["omniauth.auth"]
+		member = Member.find_by_fbid(auth.uid)
+		if member && member.admin_id?
+			session[:member_id] = member.id
+			source = session[:source] || :root
+			session[:source] = nil
+			redirect_to source, :notice => "Signed in!"
+		else
+			redirect_to :root, :notice => "You aren't an admin!"
+		end
 	end
 
 	def destroy

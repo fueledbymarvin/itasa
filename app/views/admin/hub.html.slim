@@ -1,3 +1,8 @@
 - provide(:title, 'Admin Hub')
 
-p Welcome to the super secret admin hub.
+- if current_member && current_member.admin_id?
+	= link_to "Manage Members", "members"
+	br
+	= link_to 'Sign Out', signout_path, id: "sign_out"
+- else
+	= link_to 'Sign In', "/auth/facebook", id: "sign_in"

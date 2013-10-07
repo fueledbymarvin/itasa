@@ -1,0 +1,36 @@
+= form_for @member do |f|
+  - if @member.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@member.errors.count, "error")} prohibited this member from being saved:"
+      ul
+        - @member.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :email
+    = f.text_field :email
+  .field
+    = f.label :college
+    = f.text_field :college
+  .field
+    = f.label :year
+    = f.text_field :year
+  .field
+    = f.label :hometown
+    = f.text_field :hometown
+  .field
+    = f.label :major
+    = f.text_field :major
+  .field
+    = f.label :position
+    = f.text_field :position
+  .field
+    = f.label :fact
+    = f.text_field :fact
+  .field
+    = f.label :place
+    = f.text_field :place
+  .actions = f.submit 'Save'

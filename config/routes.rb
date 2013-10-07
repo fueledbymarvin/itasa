@@ -1,4 +1,6 @@
 Itasa::Application.routes.draw do
+  resources :members
+  
   root :to => 'static_pages#home'
 
   match "/admin" => "admin#hub"

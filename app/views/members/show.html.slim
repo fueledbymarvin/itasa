@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @member.name
+p
+  strong Email:
+  = @member.email
+p
+  strong College:
+  = @member.college
+p
+  strong Year:
+  = @member.year
+p
+  strong Hometown:
+  = @member.hometown
+p
+  strong Major:
+  = @member.major
+p
+  strong Position:
+  = @member.position
+p
+  strong Fact:
+  = @member.fact
+p
+  strong Place:
+  = @member.place
+
+= link_to 'Edit', edit_member_path(@member)
+'|
+= link_to 'Back', members_path
