@@ -51,7 +51,7 @@ h1 {
 	}
 	.answer {
 		color: $mgColor;
-		background-color: #4ddfff;
+		background-color: $homeColor;
 		width: 70%;
 		text-align: right;
 	}
@@ -67,4 +67,8 @@ h1 {
 .wrap-bottom {
 	left: 100%;
 	margin: 0.2em;
+}
+
+.textbox .title p {
+	color: $homeColor;
 }

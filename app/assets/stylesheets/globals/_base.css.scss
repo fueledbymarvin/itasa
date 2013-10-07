@@ -41,7 +41,7 @@ header {
 	width: 100%;
 	position: absolute;
 	background-color: rgba(255, 255, 255, 0.77);
-	z-index: 198;
+	z-index: 0;
 	@include transition (opacity 0.3s ease-in-out);
 }
 
@@ -135,4 +135,39 @@ footer {
 
 #placeholder {
 	height: 9001px;
+}
+
+.textbox {
+	max-width: 800px;
+	text-align: center;
+	margin: 0 auto;
+	padding: 1em 0;
+	.title {
+		font-size: 2.5em;
+		p {
+			padding: 0 0.7em;
+			background: $bgColor;
+			position: relative;
+			display: inline;
+		}
+	}
+	.line {
+		border-top: 0.05em solid lighten($mgColor, 10%);
+		border-bottom: 0.05em solid lighten($mgColor, 10%);
+		position: relative;
+		top: 0.5em;
+		width: 0;
+		left: 50%;
+		@include transform( translate(-50%, 0%) );
+	}
+	.text {
+		font-family: 'klinic_slabbook';
+		padding: 1em;
+		line-height: 2em;
+		font-weight: 500;
+		font-size: 1.2em;
+		opacity: 0;
+		position: relative;
+		top: -1em;
+	}
 }

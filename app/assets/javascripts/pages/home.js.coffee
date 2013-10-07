@@ -3,8 +3,12 @@ animateQA = (i) ->
 		$('.qa:eq(' + i + ')').addClass("next")
 
 window.initHome = ->
-	for i in [0...$('.qa').length]
-		setTimeout(animateQA(i), i * 100)	
+	$('.qa:eq(0)').waypoint
+		handler: ->
+			for i in [0...$('.qa').length]
+				setTimeout(animateQA(i), i * 100)	
+		offset: '95%'
+		triggerOnce: true
 
 	$('.qa:eq(5)').waypoint
 		handler: ->

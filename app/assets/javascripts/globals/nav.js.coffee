@@ -2,7 +2,7 @@ jQuery ->
 
 	### VARIABLES ###
 	pages = ["/", "/about", "/register", "/schedule", "/contact"]
-	navColors = ["#4ddfff", "#f8d337", "#00aeef", "#FFFF66", "#99C3FF"]
+	navColors = ["#4ddfff", "#f8d337", "#00aeef", "#ffff66", "#99c3ff"]
 	defaultColor = "#ffffff"
 	bgColor = "#2b303e"
 	links = $('nav li a')
@@ -194,7 +194,7 @@ jQuery ->
 						changing = true
 					$('body').animate { scrollTop: 0 }, 300, 'easeInOutQuad', ->
 						disable_scroll()
-						$('#desaturate').css { opacity: 1 }
+						$('#desaturate').css { opacity: 1, zIndex: 198 }
 						placeHex()
 						$('#main.container').attr("id", "prev")
 						main = $('<div id="main" class="container"></div>')
@@ -238,7 +238,7 @@ jQuery ->
 					top: -1 * ($("#circle").offset()["top"] + 2000) + "px"
 					left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
 			complete: ->
-				$('#desaturate').css { opacity: 0 }
+				$('#desaturate').css { opacity: 0, zIndex: 0 }
 				enable_scroll()
 				$("#prev").remove()
 				$("#main").unwrap()
@@ -284,6 +284,15 @@ jQuery ->
 			when 2 then window.initRegister()
 			when 3 then window.initSchedule()
 			when 4 then window.initContact()
+		$('.textbox .title').waypoint
+			handler: ->
+				$('.textbox .title .line').animate { width: '100%' },
+					duration: 500
+					easing: 'easeInOutQuad'
+					complete: ->
+						$('.textbox .text').animate { opacity: 1, top: 0 }, { duration: 300, easing: 'easeInOutQuad' }
+			offset: 'bottom-in-view'
+			triggerOnce: true
 
 	httpInit = (pos) ->
 		->

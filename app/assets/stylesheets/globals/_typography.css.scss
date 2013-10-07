@@ -20,6 +20,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'klinic_slabbook';
+    src: url('klinicslabbook-webfont.eot');
+    src: url('klinicslabbook-webfont.eot?#iefix') format('embedded-opentype'),
+         url('klinicslabbook-webfont.woff') format('woff'),
+         url('klinicslabbook-webfont.ttf') format('truetype'),
+         url('klinicslabbook-webfont.svg#klinic_slabbook') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-size: 16px !important;
     font-family: 'BebasNeueRegular' !important;
