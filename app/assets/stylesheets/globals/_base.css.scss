@@ -139,10 +139,10 @@ footer {
 
 .textbox {
 	max-width: 800px;
-	text-align: center;
 	margin: 0 auto;
 	padding: 1em 0;
 	.title {
+		text-align: center;
 		font-size: 2.5em;
 		p {
 			padding: 0 0.7em;
@@ -161,13 +161,26 @@ footer {
 		@include transform( translate(-50%, 0%) );
 	}
 	.text {
+		text-align: justify;
 		font-family: 'klinic_slabbook';
 		padding: 1em;
-		line-height: 2em;
+		line-height: 1.5em;
 		font-weight: 500;
 		font-size: 1.2em;
-		opacity: 0;
 		position: relative;
-		top: -1em;
+	}
+	.subtitle {
+		text-align: left;
+		font-family: 'BebasNeueRegular';
+		font-size: 2em;
+		.underline {
+			width: 0;
+			top: 0.1em;
+			left: 0.2em;
+			position: relative;
+			border-top: 0.05em solid lighten($mgColor, 10%);
+			border-bottom: 0.05em solid lighten($mgColor, 10%);
+		}
+		margin: 1em;
 	}
 }

@@ -1,18 +1,46 @@
 - provide(:title, 'ITASA 2014 ECC - About')
 
-#desaturate
-
-#top
-	= image_tag "about.jpg"
-
-#hex-line
-	#hex-bg
-		.hex-top
-		.hex-middle
-		.hex-bottom
+= render partial: "globals/top", locals: { image: "about.jpg" }
 
 #bottom
 	#content
-		h1 Coming Soon.
+		.textbox
+			.title
+				.line
+				p About ITASA ECC
+			.text
+				p After an eleven year hiatus, Yale is once again hosting this annual gathering of over 200 Taiwanese American college students and bringing it back to where the annual ITASA East Coast Conference began in 1993. We invite you to take part in one of the biggest Taiwanese American collegiate events of the year!
+
+		.textbox
+			.title
+				.line
+				p Our Vision
+			.text
+				p As Taiwanese Americans, we are inspired by conferences that teach us to shoot for the stars and aim for the moon, but when it comes to taking off, our aspirations often fall flat. Work in Progress is about grounding the ideas we have left floating in the air and making a lasting, tangible impact. It is about gathering the resources to construct our own futures and the futures of our fellow Taiwanese-Americans.
+				br
+				p As the home of Dwight Hall, the largest collegiate, student-run community service organization in the nation, Yale has a renowned history of encouraging students to take action. Students at Yale don’t just dream of change; they respond to the problems they see to improve their lives and better the world. We’ve chosen our theme to reflect our emphasis on taking great ideas and making them mean something in the real world.
+				br
+				p The theme Work In Progress reminds us that there is always something we can be doing to make a difference in our communities. Building on the ideas of activism and service, our vision for our conference is that every attendee will leave Yale equipped with the knowledge, resources, skills, and relationships they will need to create positive change. 
+
+		.textbox
+			.title
+				.line
+				p Meet the Team
+			.text
+				.subtitle
+					p Directors
+					.underline
+				.subtitle
+					p Marketing
+					.underline
+				.subtitle
+					p Programming
+					.underline
+				.subtitle
+					p Logistics
+					.underline
+				.subtitle
+					p Finance
+					.underline
 
 		#placeholder

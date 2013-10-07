@@ -117,7 +117,8 @@ jQuery ->
 		$("#{section} #hex-#{side} .hex-top").css { borderBottomColor: color }
 		$("#{section} #hex-#{side} .hex-middle").css { backgroundColor: color }
 		$("#{section} #hex-#{side} .hex-bottom").css { borderTopColor: color  }
-
+		$('#main .textbox .title p').css color: color
+		$('#main .textbox .underline').css borderColor: color
 
 	colorMiddle = (pos) ->
 		colorHex("bg", recolor(navColors[pos], darkerFactor), "#main")
@@ -284,15 +285,21 @@ jQuery ->
 			when 2 then window.initRegister()
 			when 3 then window.initSchedule()
 			when 4 then window.initContact()
-		$('.textbox .title').waypoint
-			handler: ->
-				$('.textbox .title .line').animate { width: '100%' },
-					duration: 500
-					easing: 'easeInOutQuad'
-					complete: ->
-						$('.textbox .text').animate { opacity: 1, top: 0 }, { duration: 300, easing: 'easeInOutQuad' }
-			offset: 'bottom-in-view'
-			triggerOnce: true
+		$('.textbox').each ->
+			$(this).find('.title').waypoint
+				handler: ->
+					$(this).find('.line').animate { width: '100%' },
+						duration: 500
+						easing: 'easeInOutQuad'
+				offset: 'bottom-in-view'
+				triggerOnce: true
+			$(this).find('.underline').each ->
+				$(this).waypoint
+					handler: ->
+						$(this).animate { width: '1em' }, { duration: 400, easing: 'easeOutBack' }
+					offset: '90%'
+					triggerOnce: true
+
 
 	httpInit = (pos) ->
 		->
