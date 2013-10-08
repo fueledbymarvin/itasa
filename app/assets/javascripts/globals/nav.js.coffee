@@ -291,13 +291,13 @@ jQuery ->
 					$(this).find('.line').animate { width: '100%' },
 						duration: 500
 						easing: 'easeInOutQuad'
-				offset: 'bottom-in-view'
+				offset: '80%'
 				triggerOnce: true
 			$(this).find('.underline').each ->
 				$(this).waypoint
 					handler: ->
-						$(this).animate { width: '1em' }, { duration: 400, easing: 'easeOutBack' }
-					offset: '90%'
+						$(this).animate { width: '1em' }, { duration: 500, easing: 'easeOutBack' }
+					offset: '80%'
 					triggerOnce: true
 
 

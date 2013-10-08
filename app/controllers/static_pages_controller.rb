@@ -6,6 +6,7 @@ class StaticPagesController < ApplicationController
 	end
 
 	def about
+		@depts = { marketing: Member.where(dept: "Marketing") }
 		if request.headers['X-PJAX']
 		    render :layout => false #add this option to save the time of layout rendering
 		end

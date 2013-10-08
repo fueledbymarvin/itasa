@@ -28,19 +28,28 @@
 				p Meet the Team
 			.text
 				.subtitle
-					p Directors
+					p Co-Directors
 					.underline
+					.dept
 				.subtitle
 					p Marketing
 					.underline
+					.dept
+						- @depts[:marketing].each_with_index do |member, i|
+								- if i != 0
+									.separator
+								= image_tag "headshots/#{member.name}.jpg"
 				.subtitle
 					p Programming
 					.underline
+					.dept
 				.subtitle
 					p Logistics
 					.underline
+					.dept
 				.subtitle
 					p Finance
 					.underline
+					.dept
 
 		#placeholder
