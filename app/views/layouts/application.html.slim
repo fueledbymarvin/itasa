@@ -88,18 +88,19 @@ html lang="en"
 						li
 							span.hoverBar
 							a href="/contact" data-pjax="true" CONTACT
-		#hex-container
-			#hex
-				#hex-front.hex-wrapper
-					.hex-top
-					.hex-middle
-						= image_tag "minilogo.png"
-					.hex-bottom
-				#hex-back.hex-wrapper
-					.hex-top
-					.hex-middle
-						= image_tag "minilogo.png"
-					.hex-bottom
+		a href="/" data-pjax="true"
+			#hex-container
+				#hex
+					#hex-front.hex-wrapper
+						.hex-top
+						.hex-middle
+							= image_tag "minilogo.png"
+						.hex-bottom
+					#hex-back.hex-wrapper
+						.hex-top
+						.hex-middle
+							= image_tag "minilogo.png"
+						.hex-bottom
 		#wrapper
 			#main.container
 				== yield

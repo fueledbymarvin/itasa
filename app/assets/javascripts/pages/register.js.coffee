@@ -1,2 +1,2 @@
-window.initRegister = ->
+window.initRegister = (color) ->
 	

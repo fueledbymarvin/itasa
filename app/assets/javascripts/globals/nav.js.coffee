@@ -280,11 +280,11 @@ jQuery ->
 
 	initPage = (pos) ->
 		switch pos
-			when 0 then window.initHome()
-			when 1 then window.initAbout()
-			when 2 then window.initRegister()
-			when 3 then window.initSchedule()
-			when 4 then window.initContact()
+			when 0 then window.initHome(navColors[pos])
+			when 1 then window.initAbout(navColors[pos])
+			when 2 then window.initRegister(navColors[pos])
+			when 3 then window.initSchedule(navColors[pos])
+			when 4 then window.initContact(navColors[pos])
 		$('.textbox').each ->
 			$(this).find('.title').waypoint
 				handler: ->

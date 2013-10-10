@@ -2,7 +2,7 @@ animateQA = (i) ->
 	->
 		$('.qa:eq(' + i + ')').addClass("next")
 
-window.initHome = ->
+window.initHome = (color) ->
 	$('.qa:eq(0)').waypoint
 		handler: ->
 			for i in [0...$('.qa').length]

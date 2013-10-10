@@ -6,4 +6,8 @@ class Member < ActiveRecord::Base
 		admins = Member.all.map { |member| member.fbid }
 		admins.include?(self.fbid)
 	end
+
+	def self.dept_names
+		["Directors", "Marketing", "Programming", "Finance", "Logistics"]
+	end
 end

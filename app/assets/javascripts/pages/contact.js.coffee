@@ -1,2 +1,2 @@
-window.initContact = ->
+window.initContact = (color) ->
 	

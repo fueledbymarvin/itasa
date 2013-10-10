@@ -1,2 +1,2 @@
-window.initSchedule = ->
+window.initSchedule = (color) ->
 	
