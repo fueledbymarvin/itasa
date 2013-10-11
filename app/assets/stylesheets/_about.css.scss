@@ -23,7 +23,7 @@
 			margin: 0.1em;
 		}
 	}
-	img, .separator {
+	img, .separator, .triangle {
 		@media only screen and (max-width: 900px) {
 			font-size: 0.8em;
 		}
@@ -57,11 +57,36 @@
 			}
 		}
 		padding: 3% 0;
-		margin-bottom: 0.5em;
 		background: $mgColor;
+		box-shadow: 0 1px 1px darken($bgColor, 5%);
+		@media only screen and (max-width: 600px) {
+			margin-bottom: 0.5em;
+		}
 	}
 	.bio-wrapper {
 		overflow: hidden;
 		height: 0;
+	}
+	.triangle {
+		width: 0.5em;
+		height: 0.5em;
+		@include transform( rotate(45deg) );
+		margin-top: -0.25em;
+		margin-bottom: 0.5em;
+		background: $mgColor;
+		box-shadow: 1px 1px 0 darken($bgColor, 5%);
+		@media only screen and (max-width: 600px) {
+			display: none;
+		}
+	}
+}
+
+@for $i from 1 through 5 {
+	@for $j from 1 through 5 {
+		.dept:nth-of-type(#{$i}) .bio-wrapper:nth-of-type(#{$j}) {
+			.triangle {
+				margin-left: #{3 * $j - 2}em;
+			}
+		}
 	}
 }

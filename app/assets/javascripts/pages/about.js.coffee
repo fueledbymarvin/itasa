@@ -7,10 +7,11 @@ bioIn = (dept, pos) ->
 		duration: 300
 		easing: 'easeInOutQuad'
 		complete: ->
+			$(this).css height: "auto"
 			$('html, body').animate { scrollTop: $('.subtitle[data-dept=' + dept + ']').offset().top - 15 }
 
 window.initAbout = (color) ->
-	$('.triangle').css {display: "none"}
+	#$('.triangle').css {display: "none"}
 	$('.text .dept').each ->
 		$(this).waypoint
 			handler: ->

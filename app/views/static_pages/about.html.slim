@@ -84,6 +84,7 @@
 											span
 												= member.fact
 												'
+									.triangle data-dept=department
 							- @depts[department].each_with_index do |member, i|
 									- if i != 0
 										.separator
