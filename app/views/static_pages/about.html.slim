@@ -9,6 +9,8 @@
 				.line
 				p About ITASA ECC
 			.text
+				p ITASA (Intercollegiate Taiwanese American Students Association) is a national 501(c)3 non-profit organization that connects, inspires, and empowers the Taiwanese American student community. ITASA’s annual East Coast Conference (ECC) attracts nearly 400 undergraduates nationwide who attend workshops led by prominent Taiwanese speakers, social events to meet fellow students, and interactive discussions about political, environmental and other social issues.
+				br
 				p After an eleven year hiatus, Yale is once again hosting this annual gathering of over 200 Taiwanese American college students and bringing it back to where the annual ITASA East Coast Conference began in 1993. We invite you to take part in one of the biggest Taiwanese American collegiate events of the year!
 
 		.textbox
@@ -41,49 +43,41 @@
 												'Name:
 											span
 												= member.name
-												'
 										p
 											span
 												'Email:
 											span
 												= link_to member.email, "mailto:#{member.email}"
-												'
 										p
 											span
 												'College &amp; Year:
 											span
 												= "#{member.college} #{member.year}"
-												'
 										p
 											span
 												'Major:
 											span
 												= member.major
-												'
 										p
 											span
 												'Hometown:
 											span
 												= member.hometown
-												'
 										p
 											span
 												'Position:
 											span
 												= member.position
-												'
 										p
 											span
 												'Favorite place on campus:
 											span
 												= member.place
-												'
 										p
 											span
 												'Fun fact:
 											span
 												= member.fact
-												'
 									.triangle data-dept=department
 							- @depts[department].each_with_index do |member, i|
 									- if i != 0

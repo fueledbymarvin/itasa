@@ -119,6 +119,7 @@ jQuery ->
 		$("#{section} #hex-#{side} .hex-bottom").css { borderTopColor: color  }
 		$('#main .textbox .title p').css color: color
 		$('#main .textbox .underline').css borderColor: color
+		$('p a').css color: color
 
 	colorMiddle = (pos) ->
 		colorHex("bg", recolor(navColors[pos], darkerFactor), "#main")
