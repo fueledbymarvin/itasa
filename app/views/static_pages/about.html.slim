@@ -45,6 +45,11 @@
 												= member.name
 										p
 											span
+												'Position:
+											span
+												= member.position
+										p
+											span
 												'Email:
 											span
 												= link_to member.email, "mailto:#{member.email}"
@@ -63,11 +68,6 @@
 												'Hometown:
 											span
 												= member.hometown
-										p
-											span
-												'Position:
-											span
-												= member.position
 										p
 											span
 												'Favorite place on campus:
