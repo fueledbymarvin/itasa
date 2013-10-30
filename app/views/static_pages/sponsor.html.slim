@@ -1,0 +1,52 @@
+- provide(:title, 'ITASA 2014 ECC - Sponsor')
+
+= render partial: "globals/top", locals: { image: "sponsor.jpg" }
+
+#bottom
+	#content
+		.textbox
+			form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank"
+			input type="hidden" name="cmd" value="_s-xclick"
+			input type="hidden" name="hosted_button_id" value="443RN2LSQJH68"
+			#donate
+				#shine
+					.ray
+					.ray
+					.ray
+				#left
+					img src="assets/paypal.png"
+				#right
+					p Donate
+					p with PayPal
+
+			.subtitle
+				p Interested in sponsoring?
+				.underline
+			.contact-text
+				p
+					'Email 
+					a href="mailto:finance@yale2014.itasa.org" finance@yale2014.itasa.org
+					'.
+
+			.subtitle
+				p Why sponsor?
+				.underline
+			.contact-text
+				p
+					'Your company can reach out to highly motivated undergraduates from top universities, many of whom are looking for internships and career development opportunities. By sponsoring us, your company will effectively recruit new talent while simultaneously supporting activism and service in the community. For more information, download the sponsorship packet
+					a href="https://docs.google.com/file/d/0B0rgePLTNxqyR3BNOHJpNkZMVGc/edit?usp=sharing" here
+					'.
+
+			.subtitle
+				p Sample of schools attended by ITASA members
+				.underline
+			.colleges
+				- @colleges.each do |college|
+					.college
+						= image_tag "colleges/#{college}.png"
+						.college-wrapper
+							span
+								p
+									= college
+
+		#placeholder

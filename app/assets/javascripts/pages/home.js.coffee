@@ -7,25 +7,6 @@ addShadow = ->
 		$('.qa').css { boxShadow: "0 1px 1px #161920" }
 
 window.initHome = (color) ->
-	$('#donate').click ->
-		$('#paypal').submit()
-
-	$('#right').hover(
-		-> $('#right, #left').addClass "next"
-		-> $('#right, #left').removeClass "next"
-	)
-
-	$('#shine').waypoint
-		handler: ->
-			$('.ray').animate { width: "0.6em" },
-				duration: 200
-				easing: 'easeInOutCirc'
-				complete: ->
-					$('.ray').delay(200).animate { opacity: 0 }, { duration: 80 }
-					$('.ray').delay(100).animate { opacity: 1 }, { duration: 80 }
-		offset: '70%'
-		triggerOnce: true
-
 	$('.qa:eq(0)').waypoint
 		handler: ->
 			for i in [0...$('.qa').length]

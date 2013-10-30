@@ -1,8 +1,8 @@
 jQuery ->
 
 	### VARIABLES ###
-	pages = ["/", "/about", "/register", "/schedule", "/contact"]
-	navColors = ["#4ddfff", "#f8d337", "#00aeef", "#ffff66", "#99c3ff"]
+	pages = ["/", "/about", "/register", "/schedule", "/sponsor", "/contact", "/competition"]
+	navColors = ["#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff"]
 	defaultColor = "#ffffff"
 	bgColor = "#2b303e"
 	links = $('nav li a')
@@ -285,7 +285,9 @@ jQuery ->
 			when 1 then window.initAbout(navColors[pos])
 			when 2 then window.initRegister(navColors[pos])
 			when 3 then window.initSchedule(navColors[pos])
-			when 4 then window.initContact(navColors[pos])
+			when 4 then window.initSponsor(navColors[pos])
+			when 5 then window.initContact(navColors[pos])
+			when 6 then window.initCompetition(navColors[pos])
 		$('.textbox').each ->
 			$(this).find('.title').waypoint
 				handler: ->
