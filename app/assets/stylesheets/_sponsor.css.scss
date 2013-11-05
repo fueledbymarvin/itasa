@@ -44,3 +44,47 @@
 		}
 	}
 }
+
+#donate {
+	cursor: pointer;
+	width: 20em;
+	background: $mgColor;
+	margin: 0 auto 2em;
+	color: $fgColor;
+	#right {
+		width: 17em;
+		margin: 0 auto;
+		padding: 1.5em;
+		text-align: center;
+		position: relative;
+		@include transition( all 0.3s $ease-in-out-circ );
+		&.next {
+			left: 3.3em;
+		}
+	}
+	#left {
+		width: 20em;
+		height: 6.6em;
+		margin: 0 auto;
+		position: absolute;
+		overflow: hidden;
+		&.next img {
+			@include transform( translate(0%, 0%) );
+		}
+	}
+	p:nth-of-type(1) {
+		font-size: 2.5em;
+	}
+	p:nth-of-type(2) {
+		font-family: 'klinic_slabbook';
+		font-size: 1.2em;
+	}
+	img {
+		background: $homeColor;
+		height: 6.6em;
+		position: absolute;
+		@include transform( translate(-100%, 0%) );
+		@include transition( all 0.3s $ease-in-out-circ );
+	}
+	box-shadow: 0 2px 2px darken($bgColor, 5%);
+}

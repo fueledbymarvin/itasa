@@ -7,6 +7,10 @@ addShadow = ->
 		$('.qa').css { boxShadow: "0 1px 1px #161920" }
 
 window.initHome = (color) ->
+	$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
+	$(window).resize ->
+		$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
+
 	$('.qa:eq(0)').waypoint
 		handler: ->
 			for i in [0...$('.qa').length]
