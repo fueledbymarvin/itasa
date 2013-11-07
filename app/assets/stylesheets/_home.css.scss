@@ -120,3 +120,66 @@ h1 {
 	@include transform( translate(-50%, 0%) );
 	border: 0.5em solid lighten($mgColor, 10%);
 }
+
+.textbox span {
+	color: $homeColor;
+}
+
+#kickoff {
+	margin: 1em 0 2em;
+	.kick {
+		position: relative;
+		display: inline-block;
+		vertical-align: top;
+		width: 30%;
+		&:nth-of-type(2) {
+			left: 5%;
+		}
+		&:nth-of-type(3) {
+			left: 10%;
+		}
+		.cta {
+			background: $homeColor;
+			box-shadow: 0 1px 1px darken($bgColor, 5%);
+			height: 5em;
+			padding: 2em 0;
+			.box {
+				width: 100%;
+				height: 5em;
+				overflow: hidden;
+			}
+			p {
+				position: relative;
+				padding: (1em/3) 0;
+				margin: 0;
+				font-family: 'BebasNeueRegular';
+				font-size: 3em;
+				color: $fgColor;
+				@include transition(top 0.3s $ease-in-out-back);
+				&.up {
+					top: (-4.8em/3);
+				}
+			}
+			img {
+				position: relative;
+				display: block;
+				margin: 0.5em auto;
+				width: 4em;
+				height: 4em;
+				@include transition(top 0.3s $ease-in-out-back);
+				&.up {
+					top: -5em;
+				}
+			}
+		}
+		p {
+			text-align: center;
+			font-size: 1.2em;
+			font-family: 'klinic_slabbook';
+			margin: 0.5em 0;
+		}
+		.lock {
+			background: $mgColor;
+		}
+	}
+}

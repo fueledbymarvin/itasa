@@ -7,6 +7,14 @@ addShadow = ->
 		$('.qa').css { boxShadow: "0 1px 1px #161920" }
 
 window.initHome = (color) ->
+	$('.kick .box').each ->
+		$(this).hover(
+			->
+				$(this).children('img, p').addClass('up')
+			->
+				$(this).children('img, p').removeClass('up')
+		)
+
 	$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
 	$(window).resize ->
 		$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
