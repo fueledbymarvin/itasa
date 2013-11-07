@@ -240,7 +240,7 @@ jQuery ->
 					top: -1 * ($("#circle").offset()["top"] + 2000) + "px"
 					left: -1 * ($("#circle").offset()["left"] + 2000) + "px"
 			complete: ->
-				$('#desaturate').css { opacity: 0, zIndex: 0 }
+				$('#desaturate').css { opacity: 0, zIndex: "-9001" }
 				enable_scroll()
 				$("#prev").remove()
 				$("#main").unwrap()
