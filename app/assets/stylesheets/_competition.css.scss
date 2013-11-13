@@ -1,8 +1,42 @@
 iframe {
 	width: 100%;
-	height: 1000px;
+	height: 1000px;;
 }
 
 .hide {
 	display: none;
+}
+
+#prizes-wrapper {
+	width: 100%;
+	background: url('diag.png') repeat;
+	padding: 4em 0 2em;
+	#prizes {
+		width: 70%;
+		max-width: 960px;
+		margin: 0 auto;
+		@media only screen and (max-width: 600px) {
+		    width: 80%;
+		}
+		@media only screen and (max-width: 400px) {
+		    width: 90%;
+		}
+		span {
+			display: block;
+		}
+		p {
+			padding: 0.7em 0.7em 0.6em;
+			margin: 0.5em 0;
+			background: $bgColor;
+			font-size: 2em;
+			display: inline-block;
+		}
+		p.title {
+			span {
+				font-size: 1.5em;
+				padding: 0.2em 0.2em 0.1em;
+				border: 1px $homeColor solid;
+			}
+		}
+	}
 }
