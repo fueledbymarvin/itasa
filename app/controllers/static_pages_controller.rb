@@ -35,7 +35,7 @@ class StaticPagesController < ApplicationController
 	end
 
 	def sponsor
-		@colleges = ["Yale University", "Princeton University", "Harvard University", "Massachusetts Institute of Technology", "Columbia University", "University of Pennsylvania", "Cornell University", "Brown University", "New York University", "Carnegie Mellon University", "Johns Hopkins University", "Rutgers University", "University of Maryland", "Boston College"]
+		@colleges = ["Yale University", "Princeton University", "Harvard University", "Massachusetts Institute of Technology", "Columbia University", "University of Pennsylvania", "Cornell University", "Brown University", "New York University", "Carnegie Mellon University", "Johns Hopkins University", "Rutgers University", "University of Maryland", "Boston College", "Wellesley College"]
 		if request.headers['X-PJAX']
 		    render :layout => false #add this option to save the time of layout rendering
 		end
