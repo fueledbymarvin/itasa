@@ -6,6 +6,12 @@ class StaticPagesController < ApplicationController
 	end
 
 	def about
+		if request.headers['X-PJAX']
+		    render :layout => false #add this option to save the time of layout rendering
+		end
+	end
+
+	def team
 		@dept_names = Member.dept_names
 		@depts = {}
 		@dept_names.each do |department|

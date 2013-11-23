@@ -87,32 +87,6 @@ h1 {
 	}
 }
 
-#shine {
-	position: relative;
-	left: -0.3em;
-	top: -0.1em;
-	.ray {
-		background: $homeColor;
-		height: 0.2em;
-		width: 0;
-		position: absolute;
-		@include transform-origin( 0 0 );
-	}
-	.ray:nth-of-type(1) {
-		@include transform( rotate(225deg) );
-	}
-	.ray:nth-of-type(2) {
-		@include transform( rotate(190deg) );
-		margin-top: 0.7em;
-		margin-left: -0.2em;
-	}
-	.ray:nth-of-type(3) {
-		@include transform( rotate(260deg) );
-		margin-left: 0.7em;
-		margin-top: -0.2em;
-	}
-}
-
 #teaser {
 	height: 0;
 	position: relative;

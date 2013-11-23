@@ -1,8 +1,8 @@
 jQuery ->
 
 	### VARIABLES ###
-	pages = ["/", "/about", "/register", "/schedule", "/sponsor", "/contact", "/competition"]
-	navColors = ["#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff"]
+	pages = ["/", "/about", "/team", "/schedule", "/competition", "/sponsor", "/contact", "/register"]
+	navColors = ["#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff", "#f8d337", "#4ddfff", "#f8d337"]
 	defaultColor = "#ffffff"
 	bgColor = "#2b303e"
 	links = $('nav li a')
@@ -283,11 +283,12 @@ jQuery ->
 		switch pos
 			when 0 then window.initHome(navColors[pos])
 			when 1 then window.initAbout(navColors[pos])
-			when 2 then window.initRegister(navColors[pos])
+			when 2 then window.initTeam(navColors[pos])
 			when 3 then window.initSchedule(navColors[pos])
-			when 4 then window.initSponsor(navColors[pos])
-			when 5 then window.initContact(navColors[pos])
-			when 6 then window.initCompetition(navColors[pos])
+			when 4 then window.initCompetition(navColors[pos])
+			when 5 then window.initSponsor(navColors[pos])
+			when 6 then window.initContact(navColors[pos])
+			when 7 then window.initRegister(navColors[pos])
 		$('.textbox').each ->
 			$(this).find('.title').waypoint
 				handler: ->
@@ -302,7 +303,24 @@ jQuery ->
 						$(this).animate { width: '1em' }, { duration: 500, easing: 'easeOutBack' }
 					offset: '80%'
 					triggerOnce: true
+		$('#donate.fancy').click ->
+			$('#paypal').submit()
 
+		$('.right').hover(
+			-> $('.right, .left').addClass "next"
+			-> $('.right, .left').removeClass "next"
+		)
+
+		$('.shine').waypoint
+			handler: ->
+				$('.ray').animate { width: "0.6em" },
+					duration: 200
+					easing: 'easeInOutCirc'
+					complete: ->
+						$('.ray').delay(200).animate { opacity: 0 }, { duration: 80 }
+						$('.ray').delay(100).animate { opacity: 1 }, { duration: 80 }
+			offset: '70%'
+			triggerOnce: true
 
 	httpInit = (pos) ->
 		->

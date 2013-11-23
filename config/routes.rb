@@ -13,6 +13,7 @@ Itasa::Application.routes.draw do
   match "/contact" => "static_pages#contact"
   match "/sponsor" => "static_pages#sponsor"
   match "/competition" => "static_pages#competition"
+  match "/team" => "static_pages#team"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
