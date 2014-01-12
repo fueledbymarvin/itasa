@@ -151,5 +151,63 @@ h1 {
 		.lock {
 			background: $mgColor;
 		}
+		.paypal {
+			cursor: pointer;
+		}
+	}
+}
+
+.home-sponsors {
+	margin-top: 2em;
+	.sponsor {
+		display: inline-block;
+		width: 8em;
+		height: 8em;
+		img {
+			width: 8em;
+			height: 8em;
+		}
+		.colored {
+			position: absolute;
+			margin-left: -8em;
+			opacity: 0;
+			@include transition( opacity 0.2s );
+			&:hover {
+				opacity: 1;
+			}
+		}
+		&.bronze {
+			width: 12em;
+			height: 12em;
+			img {
+				width: 12em;
+				height: 12em;
+			}
+			.colored {
+				margin-left: -12em;
+			}
+		}
+		&.silver {
+			width: 16em;
+			height: 16em;
+			img {
+				width: 16em;
+				height: 16em;
+			}
+			.colored {
+				margin-left: -16em;
+			}
+		}
+		&.gold {
+			width: 20em;
+			height: 20em;
+			img {
+				width: 20em;
+				height: 20em;
+			}
+			.colored {
+				margin-left: -20em;
+			}
+		}
 	}
 }

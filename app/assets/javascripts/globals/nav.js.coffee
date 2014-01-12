@@ -305,6 +305,8 @@ jQuery ->
 					triggerOnce: true
 		$('#donate.fancy').click ->
 			$('#paypal').submit()
+		$('.paypal').click ->
+			$('#paypal').submit()
 
 		$('.right').hover(
 			-> $('.right, .left').addClass "next"
@@ -321,6 +323,10 @@ jQuery ->
 						$('.ray').delay(100).animate { opacity: 1 }, { duration: 80 }
 			offset: '70%'
 			triggerOnce: true
+
+		$('.yt').css { height: $('.yt').width() / 16 * 9 + "px" }
+		$(window).resize ->
+			$('.yt').css { height: $('.yt').width() / 16 * 9 + "px" }
 
 	httpInit = (pos) ->
 		->

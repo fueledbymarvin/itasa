@@ -10,7 +10,7 @@ gem 'omniauth-facebook', '1.4.0'
 gem 'bourbon'
 gem 'rack-pjax'
 gem 'newrelic_rpm'
-# gem 'therubyracer' # uncomment if using vagrant
+gem 'therubyracer' # uncomment if using vagrant
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

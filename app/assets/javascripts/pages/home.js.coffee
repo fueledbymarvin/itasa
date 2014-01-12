@@ -15,10 +15,6 @@ window.initHome = (color) ->
 				$(this).children('img, p').removeClass('up')
 		)
 
-	$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
-	$(window).resize ->
-		$('#teaser').css { height: $('#teaser').width() / 16 * 9 + "px" }
-
 	$('.qa:eq(0)').waypoint
 		handler: ->
 			for i in [0...$('.qa').length]
