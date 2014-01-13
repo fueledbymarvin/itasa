@@ -1,0 +1,31 @@
+.speakers-left {
+  width: 49%;
+  float: left;
+  @media only screen and (max-width: 800px) {
+    float: none;
+    width: 100%;
+  }
+}
+
+.speakers-right {
+  width: 49%;
+  float: right;
+  @media only screen and (max-width: 800px) {
+    float: none;
+    width: 100%;
+  }
+}
+
+.speaker {
+  display: block;
+  background: $mgColor;
+  width: 100%;
+  .speaker-info {
+    padding: 0 2em 1.5em;
+    font-size: 0.8em;
+  }
+  img {
+    width: 100%;
+  }
+  margin-bottom: 1em;
+}

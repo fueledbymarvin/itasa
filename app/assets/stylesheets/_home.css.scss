@@ -87,14 +87,6 @@ h1 {
 	}
 }
 
-#teaser {
-	height: 0;
-	position: relative;
-	left: 50%;
-	@include transform( translate(-50%, 0%) );
-	border: 0.5em solid lighten($mgColor, 10%);
-}
-
 #kickoff {
 	margin: 1em 0 2em;
 	.kick {

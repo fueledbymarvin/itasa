@@ -131,6 +131,7 @@ footer {
 
 
 #placeholder {
+	clear: both;
 	height: 9001px;
 }
 
@@ -157,7 +158,6 @@ footer {
 		@include transform( translate(-50%, 0%) );
 	}
 	.text {
-		text-align: justify;
 		font-family: 'klinic_slabbook';
 		padding: 1em;
 		line-height: 1.5em;
