@@ -46,10 +46,4 @@ class StaticPagesController < ApplicationController
 		    render :layout => false #add this option to save the time of layout rendering
 		end
 	end
-
-	def competition
-		if request.headers['X-PJAX']
-		    render :layout => false #add this option to save the time of layout rendering
-		end
-	end
 end

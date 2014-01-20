@@ -28,4 +28,37 @@
     width: 100%;
   }
   margin-bottom: 1em;
+  .speaker-bio {
+    display: none;
+  }
+  .text-btn {
+    color: $scheduleColor;
+    cursor: pointer;
+  }
+}
+
+.schedule {
+  table {
+    width: 100%;
+  }
+  .event {
+    width: 100%;
+    &:nth-of-type(odd) {
+      background: lighten($mgColor, 10%);
+    }
+    &:nth-of-type(even) {
+      background: lighten($mgColor, 5%);
+    }
+  }
+  .info, .desc {
+    vertical-align: top;
+    padding: 1em 3%;
+  }
+  .info {
+    width: 21%;
+  }
+  .desc {
+    width: 70%;
+    padding-left: 0;
+  }
 }

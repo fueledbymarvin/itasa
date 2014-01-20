@@ -1,6 +1,6 @@
 Itasa::Application.routes.draw do
   resources :members
-  
+
   root :to => 'static_pages#home'
 
   match "/admin" => "admin#hub"
@@ -12,7 +12,6 @@ Itasa::Application.routes.draw do
   match "/schedule" => "static_pages#schedule"
   match "/contact" => "static_pages#contact"
   match "/sponsor" => "static_pages#sponsor"
-  match "/competition" => "static_pages#competition"
   match "/team" => "static_pages#team"
 
   # The priority is based upon order of creation:
